@@ -128,7 +128,9 @@ echo date("D", strtotime($input)) . "\n";
             -webkit-print-color-adjust: exact;
         }
 
-        #header, #header *,.gfg,
+        #header,
+        #header *,
+        .gfg,
         .gfg * {
             visibility: visible;
 
@@ -139,20 +141,22 @@ echo date("D", strtotime($input)) . "\n";
             background-repeat: no-repeat;
             background-position: center;
         }
-        h1 {
-        color: #cc381c;
-        text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
-        font-size: 2em;
-        letter-spacing: 1px;
-    }
 
-    h6 {
-        font-size: 1em;
-        letter-spacing: 1;
-    }
+        h1 {
+            color: #cc381c;
+            text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+            font-size: 2em;
+            letter-spacing: 1px;
+        }
+
+        h6 {
+            font-size: 1em;
+            letter-spacing: 1;
+        }
+
         .vertical {
-      left: 55%;
-    }
+            left: 55%;
+        }
 
     }
 
@@ -200,43 +204,44 @@ echo date("D", strtotime($input)) . "\n";
         background-color: #eee;
         color: #000;
     }
+
     .vertical {
-      border-left: 6px solid #cc381c;
-      height: 120px;
-      position:absolute;
-      left: 18%;
+        border-left: 6px solid #cc381c;
+        height: 120px;
+        position: absolute;
+        left: 18%;
     }
     </style>
     <script>
-        window.addEventListener("contextmenu", e => e.preventDefault());
+    window.addEventListener("contextmenu", e => e.preventDefault());
     </script>
 </head>
 
 <body>
     <div id="container">
-		<div id="header">
-		<div class="row">
-                            <div class="item-one">
-                                <img src="assets/img/favicon.png" alt="logo" id="logo">
-                            </div>
-                            
-                            <div class="item-two">
-                                <div class = "vertical"></div>
-                                <address>
-                                    <i class="fa fa-map-marker red"></i>&nbsp;<?=$config->address?>
-                                    <br>
-                                    <i class="fa fa-mobile red"></i>&nbsp;<?= $config->contact_phone ?>
-                                    <br>
-                                    <i class="fa fa-envelope red"></i>&nbsp;<?=$config->contact_email?>
-                                </address>
-                                <br>
-                                <h1>CAPITAL MEDICARE ABAKALIKI</h1><br>
-                                
-                            </div>
-                        </div>
-						
-						<!--<hr style="border-top: 4px solid #cc381c">-->
-		</div>
+        <div id="header">
+            <div class="row">
+                <div class="item-one">
+                    <img src="assets/img/favicon.png" alt="logo" id="logo">
+                </div>
+
+                <div class="item-two">
+                    <div class="vertical"></div>
+                    <address>
+                        <i class="fa fa-map-marker red"></i>&nbsp;<?=$config->address?>
+                        <br>
+                        <i class="fa fa-mobile red"></i>&nbsp;<?= $config->contact_phone ?>
+                        <br>
+                        <i class="fa fa-envelope red"></i>&nbsp;<?=$config->contact_email?>
+                    </address>
+                    <br>
+                    <h1>CAPITAL MEDICARE ABAKALIKI</h1><br>
+
+                </div>
+            </div>
+
+            <!--<hr style="border-top: 4px solid #cc381c">-->
+        </div>
 
         <table class="gfg">
             <tbody>
@@ -287,15 +292,15 @@ echo date("D", strtotime($input)) . "\n";
                     <td></td>
                     <td></td>
                 </tr>
-                        </div>
-                        
-                    </td>
-                </tr>
+    </div>
+
+    </td>
+    </tr>
 
 
-            </tbody>
+    </tbody>
 
-        </table>
+    </table>
 
     </div>
     <script>
@@ -319,4 +324,3 @@ echo date("D", strtotime($input)) . "\n";
 </body>
 
 </html>
-

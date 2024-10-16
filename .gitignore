@@ -1,1 +1,6 @@
 functions/Database.php
+functions/error_log.txt
+error_log.txt
+request/error_log.txt
+request/patient_edits.txt
+request/*.txt

@@ -4,29 +4,18 @@ if (!($_SESSION['role_id'] && $_SESSION['user_id']))
 $class = new Functions();
 $condition = '';
 
-//if($_GET['date_to'] && $_GET['date_from']){
-//date interval
+
 $from = (filter_has_var(INPUT_GET, 'date_from')) ? htmlentities(filter_input(INPUT_GET, 'date_from'), ENT_QUOTES) . ' 00:00:00' : date("Y-m-d") . " 00:00:59";
 $to = (filter_has_var(INPUT_GET, 'date_to')) ? htmlentities(filter_input(INPUT_GET, 'date_to'), ENT_QUOTES) . ' 23:59:59' : date("Y-m-d") . " 23:59:59";
 $condition .= " AND (t.created_at BETWEEN '$from' AND '$to') ";
-//}
 
-$sales = $class->rawQuery("SELECT t.id,t.client_id,DATE_FORMAT(t.created_at, '%d/%m/%Y') AS created_at,
-CONCAT(c.fname,' ',c.lname,' ',c.oname) AS name, c.phone,c.dob
-FROM transactions t JOIN clients_tbl c ON t.client_id = c.ref
-WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
+$query = "SELECT lt.name test,DATE_FORMAT(tt.created_at, '%d/%m/%Y') AS created_at,
+CONCAT(c.fname,' ',c.lname,' ',c.oname) AS name, c.phone,c.dob, tt.client_id,tt.id FROM tests_taken tt 
+LEFT JOIN sub_labtest_tbl lt ON tt.test_id = lt.id
+JOIN clients_tbl c ON tt.client_id = c.ref WHERE tt.status = 0 ORDER BY tt.created_at DESC LIMIT 500";
 
-/**
-<?php $tests = $class->fetchAll("tests_taken"," WHERE tranx_id = '{$x->id}'");
-                                                    $k = 1;
-                                                    foreach($tests as $t): ?>
-<?php if($t->test_result) echo "<i class='fa fa-check-circle text-success'></i>";
-                                                        else echo "<i class='fa fa-times text-danger'></i>"; ?>
-<strong class="text-danger"><?=$k++.'.' .$class->fetchColumn('sub_labtest_tbl','name','id',$t->test_id) ?>
-</strong><br>
+$sales = $class->rawQuery($query);
 
-<?php endforeach; ?>
-*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,8 +60,6 @@ WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
                                                 placeholder="Date To" data-date-format="yyyy-mm-dd" name="date_to"
                                                 value="<?= filter_input(INPUT_GET, 'date_to') ?>">
                                         </div>
-
-
                                         <div class="form-group col-md-3">
                                             <label>Search Record</label>
                                             <input type="submit" class="form-control btn btn-success btn-sm"
@@ -91,7 +78,7 @@ WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
                                                 <th>Client ID</th>
                                                 <th>Client</th>
                                                 <th>Age</th>
-                                                <!--<th>Tests</th>-->
+                                                <th>Test</th>
                                                 <th>Date</th>
                                                 <th></th>
                                             </tr>
@@ -106,16 +93,16 @@ WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
                                                 ?>
                                                 <tr>
                                                     <td><?= $i++ ?></td>
-                                                    <td><a href="client_profile.php?refx=<?= $ref ?>"
-                                                            class="btn btn-link"><?= $x->client_id ?></a></td>
                                                     <td>
-                                                        <!--<span data-href="<?= $x->client_id ?>" class='clienta' onclick="clientToolTip(this)">preview</span>-->
+                                                        <a href="client_profile.php?refx=<?= $ref ?>"
+                                                            class="btn btn-link"><?= $x->client_id ?>
+                                                        </a>
+                                                    </td>
+                                                    <td>
                                                         <?= $x->name ?>
                                                     </td>
                                                     <td><?= $x->dob ?></td>
-                                                    <!--<td>-->
-
-                                                    <!--</td>-->
+                                                    <td><?= $x->test ?></td>
                                                     <td><?= $x->created_at ?></td>
                                                     <td>
                                                         <a href="jodit.php?refx=<?= $txref ?>"
@@ -144,14 +131,16 @@ WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
     <script src="js/tejiri.js"></script>
     <script>
         /*        window.onload=()=>{
-                    const buttonList = document.querySelectorAll(".clienta");
-                    const buttonLen = buttonList.length;
-                    for(var i=0;i<buttonLen;i++){
-                        clientToolTip(buttonList[i]);
-                    }
-                }*/
+                            const buttonList = document.querySelectorAll(".clienta");
+                            const buttonLen = buttonList.length;
+                            for(var i=0;i<buttonLen;i++){
+                                clientToolTip(buttonList[i]);
+                            }
+                        }*/
         function clientToolTip(param) {
-            const t = new URLSearchParams({ href: param.getAttribute("data-href") }).toString();
+            const t = new URLSearchParams({
+                href: param.getAttribute("data-href")
+            }).toString();
             let a = new XMLHttpRequest();
             a.open("POST", "functions/fetch_client.php"),
                 a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),

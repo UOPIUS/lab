@@ -67,7 +67,7 @@ $sales = $class->rawQuery("
                                                 placeholder="Date To" data-date-format="yyyy-mm-dd" name="date_to"
                                                 value="<?= filter_input(INPUT_GET, 'date_to') ?>">
                                         </div>
-                                    <!------------------------
+                                        <!------------------------
                                         <div class="form-group col-md-3">
                                             <label for="sel1">Transaction type</label>
                                             <select class="form-control" name='trans_type'>
@@ -125,7 +125,8 @@ $sales = $class->rawQuery("
                                                     <?php if($t->test_result) echo "<i class='fa fa-check-circle text-success'></i>";
                                                         else echo "<i class='fa fa-times text-danger'></i>"; ?>
                                                     foreach($tests as $t): ?>
-                                                    <strong class="text-danger"><?=$i++.'.' .$class->fetchColumn('sub_labtest_tbl','name','id',$t->test_id) ?>
+                                                    <strong
+                                                        class="text-danger"><?=$i++.'.' .$class->fetchColumn('sub_labtest_tbl','name','id',$t->test_id) ?>
                                                     </strong><br>
 
                                                     <?php endforeach; ?>
