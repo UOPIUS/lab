@@ -1,0 +1,123 @@
+[25-Jun-2023 17:44:43 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' '%d/%m/%Y') AS created_at FROM clients_tbl c
+   ORDER BY created_at DESC LIM...' at line 2 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('\n   SELECT CONC...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/customersFetch.php(3): Functions->rawQuery('\n   SELECT CONC...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325
+[30-Oct-2023 08:33:15 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:19
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php(19): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 19
+[30-Oct-2023 08:33:49 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:19
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php(19): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 19
+[30-Oct-2023 08:34:06 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:19
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php(19): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 19
+[30-Oct-2023 08:36:18 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 24
+[30-Oct-2023 08:40:04 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 24
+[30-Oct-2023 08:41:05 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 24
+[30-Oct-2023 08:54:19 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Database::eccrpt() in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 24
+[30-Oct-2023 08:55:15 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Database::eccrpt() in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 24
+[30-Oct-2023 10:14:55 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Database::eccrpt() in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 24
+[30-Oct-2023 10:16:58 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Database::eccrpt() in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 24
+[30-Oct-2023 10:18:17 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Database::eccrpt() in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:23
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 23
+[30-Oct-2023 10:51:45 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Database::eccrpt() in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php:23
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/ncvTg015P8dP8msi.php on line 23
+[31-Oct-2023 17:36:50 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function rawQuery() on null in /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php on line 7
+[31-Oct-2023 17:39:22 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function rawQuery() on null in /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php on line 7
+[31-Oct-2023 18:20:16 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('SELECT slb.name...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(21): Functions->rawQuery('SELECT slb.name...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325
+[31-Oct-2023 18:22:44 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('SELECT slb.name...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(21): Functions->rawQuery('SELECT slb.name...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325
+[31-Oct-2023 18:25:04 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('SELECT slb.name...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(21): Functions->rawQuery('SELECT slb.name...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325
+[31-Oct-2023 18:25:05 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Functions::simple_encrypt() must be of the type string, null given, called in /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php on line 9 and defined in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:289
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(9): Functions->simple_encrypt(NULL, 'e')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 289
+[31-Oct-2023 18:25:05 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Functions::simple_encrypt() must be of the type string, null given, called in /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php on line 9 and defined in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:289
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(9): Functions->simple_encrypt(NULL, 'e')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 289
+[31-Oct-2023 18:25:05 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Functions::simple_encrypt() must be of the type string, null given, called in /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php on line 9 and defined in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:289
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(9): Functions->simple_encrypt(NULL, 'e')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 289
+[31-Oct-2023 18:31:48 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('SELECT slb.name...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(19): Functions->rawQuery('SELECT slb.name...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325
+[31-Oct-2023 18:32:25 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('SELECT slb.name...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(19): Functions->rawQuery('SELECT slb.name...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325
+[31-Oct-2023 18:32:25 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('SELECT slb.name...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(19): Functions->rawQuery('SELECT slb.name...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325
+[31-Oct-2023 18:34:42 Africa/Lagos] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1 in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php:325
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php(325): PDO->query('SELECT slb.name...')
+#1 /home/saltfxag/lab.saltcitydiagnostics.com/functions/fetch_patients.php(19): Functions->rawQuery('SELECT slb.name...')
+#2 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/functions/Functions.php on line 325

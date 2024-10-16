@@ -1,0 +1,170 @@
+[30-Oct-2023 08:52:21 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 08:53:05 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 08:53:49 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 08:55:24 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 08:57:42 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 09:03:49 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 09:05:07 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 09:17:45 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 09:18:24 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 09:26:21 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 09:49:25 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[30-Oct-2023 09:49:51 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php:26
+Stack trace:
+#0 /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/saltfxag/lab.saltcitydiagnostics.com/request/make_payment.php on line 26
+[08-Nov-2023 05:03:42 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:26
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 26
+[08-Nov-2023 05:04:29 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:26
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 26
+[08-Nov-2023 05:05:44 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:26
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 26
+[08-Nov-2023 05:06:41 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:26
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 26
+[08-Nov-2023 08:11:50 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:26
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 26
+[08-Nov-2023 09:09:11 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: stdClass + int in /home/capitalmedicares/lab.capitalmedicares.com/functions/Functions.php:172
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php(35): Functions->unique_id()
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/functions/Functions.php on line 172
+[08-Nov-2023 09:10:00 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: stdClass + int in /home/capitalmedicares/lab.capitalmedicares.com/functions/Functions.php:172
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php(35): Functions->unique_id()
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/functions/Functions.php on line 172
+[08-Nov-2023 10:22:41 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:26
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 26
+[08-Nov-2023 10:22:41 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:26
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(26): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 26
+[04-Dec-2023 13:01:20 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:61
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 61
+[04-Dec-2023 13:02:49 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:61
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 61
+[04-Dec-2023 13:15:28 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:61
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 61
+[04-Dec-2023 13:44:45 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 62
+[04-Dec-2023 13:46:15 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 62
+[04-Dec-2023 13:46:45 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 62
+[04-Dec-2023 13:48:39 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 62
+[04-Dec-2023 13:48:54 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 62
+[04-Dec-2023 13:50:34 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 62
+[04-Dec-2023 13:50:50 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to a member function simple_encrypt() on null in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php:62
+Stack trace:
+#0 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/add_client.php on line 62
+[18-Jun-2024 09:13:44 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:20
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(20): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 20
+[07-Oct-2024 11:28:08 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:20
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(20): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 20
+[07-Oct-2024 11:28:08 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:20
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(20): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 20
+[07-Oct-2024 11:28:50 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:20
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(20): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 20
+[07-Oct-2024 11:29:17 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: is_nan(): Argument #1 ($num) must be of type float, string given in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php:20
+Stack trace:
+#0 /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php(20): is_nan('')
+#1 {main}
+  thrown in /home/capitalmedicares/lab.capitalmedicares.com/request/make_payment.php on line 20
