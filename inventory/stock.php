@@ -7,13 +7,11 @@ if (NULL !== filter_input(INPUT_GET, 'id') && NULL !== filter_input(INPUT_GET, '
     $id = $_REQUEST['id'];
     $status = $_REQUEST['s'];
     $new_status = ($status == '1') ? '0' : '1';
-    $class->updateStatus('products', 'id', $id, $new_status);
+    $class->updateStatus('stocks', 'id', $id, $new_status);
 }
-$kindreds = $class->rawQuery("SELECT p.name, c.name category_name, q.name unit, q.quantity, u.full_name author, p.created_at
-FROM products p
-JOIN inventory_units q ON p.inventory_unit_id = q.id 
-JOIN inventory_categories c ON p.inventory_category_id = c.id
-JOIN users_tbl u ON p.user_id = u.user_id ORDER BY p.created_at DESC");
+$kindreds = $class->rawQuery("SELECT s.balance,s.id, s.status, p.name, c.name category_name, q.name unit, q.quantity, p.created_at
+FROM stocks s JOIN products p ON s.product_id = p.id JOIN inventory_units q ON p.inventory_unit_id = q.id 
+JOIN inventory_categories c ON p.inventory_category_id = c.id ORDER BY p.created_at DESC");
 
 $config = $class->fetchSettings();
 ?>
@@ -43,7 +41,7 @@ $config = $class->fetchSettings();
                     <div class="card mb-4">
                         <div class="card-header">
 
-                            <a class="btn btn-pill btn-danger btn-air-danger float-right" href="create.php">
+                            <a class="btn btn-pill btn-outline-dark btn-air-dark float-right" href="create.php">
                                 <i class="fa fa-plus-circle"></i>&nbsp;Add New Stock
                             </a>
                         </div>
@@ -51,16 +49,12 @@ $config = $class->fetchSettings();
                             <div class="table-responsive mt-4">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Product</th>
-                                            <th>Category</th>
-                                            <th>Unit Measured</th>
-                                            <th>Quantity in Unit</th>
-                                            <th>Created by</th>
-                                            <th>Date created</th>
-                                            <th>Status</th>
-                                            <th></th>
+                                        <th>#</th>
+                                        <th>Product</th>
+                                        <th>Category</th>
+                                        <th>Current Stock</th>
+                                        <th>Date created</th>
+                                        <th>Status</th>
                                         </tr>
                                     </thead>
 
@@ -68,31 +62,27 @@ $config = $class->fetchSettings();
                                         <?php
                                         $i = 1;
                                         foreach ($kindreds as $vl): ?>
-                                        <tr>
-                                            <td><?= $i++ ?></td>
-                                            <td><?= $vl->name ?></td>
-                                            <td><?= $vl->category_name ?></td>
-                                            <td><?= $vl->unit ?></td>
-                                            <td><?= $vl->quantity ?></td>
-                                            <td><?= $vl->author ?></td>
-                                            <td><?= $vl->created_at ?></td>
-                                            <td>
-                                                <?php
+                                            <tr>
+                                                <td><?= $i++ ?></td>
+                                                <td>
+                                                    <a href="stock_timeline.php?idx=<?= $vl->id ?>">
+                                                        <?= $vl->name ?>
+                                                    </a>
+                                                </td>
+                                                <td><?= $vl->category_name ?></td>
+                                                <td><?= number_format($vl->balance, 2) ?>&nbsp;<?= $vl->unit ?>(s)</td>
+                                                <td><?= $vl->created_at ?></td>
+
+                                                <td>
+                                                    <?php
                                                     $status = $vl->status;
                                                     if ($status == 1)
                                                         echo "<a class='btn btn-success btn-sm' href='" . $_SERVER['PHP_SELF'] . '?id=' . $vl->id . '&s=' . $status . "'>Active</a>";
                                                     else
                                                         echo "<a class='btn btn-danger btn-sm' href='" . $_SERVER['PHP_SELF'] . '?id=' . $vl->id . '&s=' . $status . "'>Inactive</a>";
                                                     ?>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#editModal" data-ref="<?= $vl->id ?>"
-                                                    data-name="<?= $vl->name ?>" data-unit="<?= $vl->unit_id ?>">
-                                                    Edit <i class="fa fa-edit"></i></button>
-
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
