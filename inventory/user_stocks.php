@@ -1,4 +1,3 @@
-user_stocks.php
 <?php include '../functions/Functions.php';
 $class = new Functions();
 if ($class->checkSession($_SESSION['user_id']) === false)
@@ -19,6 +18,7 @@ $raw = "SELECT p.name productName, st.unit, st.balance, st.created_at, st.update
 FROM user_stocks st JOIN products p ON st.product_id = p.id 
 LEFT JOIN users_tbl u ON st.owner_id = u.user_id 
 JOIN inventory_units un ON p.inventory_unit_id = un.id
+WHERE st.owner_id = '{$_SESSION['user_id']}'
 ORDER BY st.created_at DESC";
 
 $data = $class->rawQuery($raw);
@@ -50,19 +50,18 @@ $products = $class->rawQuery("SELECT id, name FROM products WHERE status = 1 ORD
                     <div class="card mb-4 mt-4">
                         <div class="card-header">
                             <h4 class="mt-4 d-inline">ASSIGNED INVENTORY LIST</h4>
-                            <a class="btn btn-pill btn-outline-dark btn-air-dark float-right"
-                                href="/inventory/assign_inventory.php">
-                                <i class="fa fa-plus-circle"></i>&nbsp;Assign item to User
-                            </a>
+
                             <form class="mt-4" action="<?= htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
                                 <div class="form-row">
-                                    
+
                                     <div class="form-group col-md-3">
                                         <label for="sel1">Products</label>
                                         <select class="form-control" name='product_id'>
                                             <option value=''>All</option>
                                             <?php foreach($products as $p): ?>
-                                                <option value="<?=$p->id?>" <?php if($p->id == filter_input(INPUT_GET,'product_id')) echo 'selected' ?>><?=$p->name?></option>
+                                            <option value="<?=$p->id?>"
+                                                <?php if($p->id == filter_input(INPUT_GET,'product_id')) echo 'selected' ?>>
+                                                <?=$p->name?></option>
                                             <?php endforeach; ?>
 
                                         </select>
@@ -91,15 +90,14 @@ $products = $class->rawQuery("SELECT id, name FROM products WHERE status = 1 ORD
                                     </thead>
                                     <tbody>
                                         <?php foreach ($data as $row): ?>
-                                            <tr>
-                                                <td><?= $row->productName ?></td>
-                                                <td><?= $row->balance ?>[<?=$row->measured?>]</td>
-                                                <td><?= $row->unit ?></td>
-                                                <td><?= $row->user ?></td>
-                                                <td><?= $row->created_at ?></td>
-                                                <td><?= $row->updated_at ?></td>
-                                                
-                                            </tr>
+                                        <tr>
+                                            <td><?= $row->productName ?></td>
+                                            <td><?= $row->balance ?>[<?=$row->measured?>]</td>
+                                            <td><?= $row->unit ?></td>
+                                            <td><?= $row->user ?></td>
+                                            <td><?= $row->created_at ?></td>
+                                            <td><?= $row->updated_at ?></td>
+                                        </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>

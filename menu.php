@@ -125,7 +125,7 @@ endswitch;
 
                     <?php endif; ?>
 
-                <!-- Adhoc Roles Added to Cashier Stops -->
+                    <!-- Adhoc Roles Added to Cashier Stops -->
 
                     <?php if ($_SESSION['role_id'] == 1071): ?>
                         <div class="sb-sidenav-menu-heading">Transactions</div>
@@ -189,11 +189,11 @@ endswitch;
 
                     <?php if ($_SESSION['role_id'] == 105): ?>
                         <div class="sb-sidenav-menu-heading">Lab Scientist Menu</div>
-                        <a class="nav-link" href="pendingLabTest.php">
+                        <a class="nav-link" href="/pendingLabTest.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                             Pending Lab Test
                         </a>
-                        <a class="nav-link" href="fd_lab_test.php">
+                        <a class="nav-link" href="/fd_lab_test.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
                             Completed Lab Test
                         </a>
@@ -201,9 +201,13 @@ endswitch;
                             <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
                             Patient Consult Profile
                         </a>
-                        <a class="nav-link" href="testTemplate.php">
+                        <a class="nav-link" href="/testTemplate.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-cog"></i></div>
                             Setup Templates
+                        </a>
+                        <a class="nav-link" href="/inventory/user_stocks.php">
+                            <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
+                            Assigned Kits
                         </a>
 
                     <?php endif; ?>
@@ -232,12 +236,12 @@ endswitch;
                             <a class="nav-link" href="/inventory/stock.php">Stocks</a>
                         </nav>
                     </div>
-                    
+
                     <a class="nav-link" href="/inventory/assigned_history.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Assigned History
                     </a>
-                     <a class="nav-link" href="/inventory/user_stocks.php">
+                    <a class="nav-link" href="/inventory/user_stocks.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         User Assigned Stocks
                     </a>
