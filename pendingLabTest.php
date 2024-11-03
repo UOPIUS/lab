@@ -3,16 +3,23 @@ if (!($_SESSION['role_id'] && $_SESSION['user_id']))
     header('location: login.php');
 $class = new Functions();
 $condition = '';
+//date interval
+$from = filter_input(INPUT_GET, 'date_from');
+$to = filter_input(INPUT_GET, 'date_to');
 
-
-$from = (filter_has_var(INPUT_GET, 'date_from')) ? htmlentities(filter_input(INPUT_GET, 'date_from'), ENT_QUOTES) . ' 00:00:00' : date("Y-m-d") . " 00:00:59";
-$to = (filter_has_var(INPUT_GET, 'date_to')) ? htmlentities(filter_input(INPUT_GET, 'date_to'), ENT_QUOTES) . ' 23:59:59' : date("Y-m-d") . " 23:59:59";
-$condition .= " AND (t.created_at BETWEEN '$from' AND '$to') ";
+//default: Display payment for the last 30 days
+$default = " AND (tt.created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)) ";
+if ($from && $to) {
+  $from .=  ' 00:00:00';
+  $to .= ' 23:59:59';
+  $default = " AND (tt.created_at BETWEEN '$from' AND '$to') ";
+}
+$condition .= $default;
 
 $query = "SELECT lt.name test,DATE_FORMAT(tt.created_at, '%d/%m/%Y') AS created_at,
 CONCAT(c.fname,' ',c.lname,' ',c.oname) AS name, c.phone,c.dob, tt.client_id,tt.id FROM tests_taken tt 
 LEFT JOIN sub_labtest_tbl lt ON tt.test_id = lt.id
-JOIN clients_tbl c ON tt.client_id = c.ref WHERE tt.status = 0 ORDER BY tt.created_at DESC LIMIT 500";
+JOIN clients_tbl c ON tt.client_id = c.ref WHERE tt.status = 0 $condition ORDER BY tt.created_at DESC LIMIT 500";
 
 $sales = $class->rawQuery($query);
 
@@ -130,13 +137,6 @@ $sales = $class->rawQuery($query);
     <script src="js/scripts.js"></script>
     <script src="js/tejiri.js"></script>
     <script>
-        /*        window.onload=()=>{
-                            const buttonList = document.querySelectorAll(".clienta");
-                            const buttonLen = buttonList.length;
-                            for(var i=0;i<buttonLen;i++){
-                                clientToolTip(buttonList[i]);
-                            }
-                        }*/
         function clientToolTip(param) {
             const t = new URLSearchParams({
                 href: param.getAttribute("data-href")

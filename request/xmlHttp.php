@@ -113,14 +113,14 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $productName = $mainStock->productName;
                     $unit = $mainStock->unit * $quantity;
                     //insufficient stock notice
-                    if($mainStock->balance > $quantity){
+                    if ($mainStock->balance > $quantity) {
                         //get the current balance for this product and this staff
                         $query = $db->connect()->prepare("SELECT balance,unit FROM user_stocks WHERE owner_id = :owner AND product_id = :product");
                         $query->bindParam(":owner", $staff);
                         $query->bindParam(":product", $product);
                         $query->execute();
                         $ownerStock = $query->fetch(PDO::FETCH_OBJ);
-                        
+
                         //staff currently does not have a store for this product
                         if (!$ownerStock) {
 
@@ -190,14 +190,41 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                         $query->bindParam(":unit", $unitMeasured);
                         $query->execute();
 
-                    }
-                    else {
+                    } else {
                         $errorBag[] = "Insufficient Stock Balance for $productName, Current Stock Balance: {$mainStock->balance}, Quantity to assign: $quantity";
                     }
 
                 } //end of foreach
                 $db->connect()->commit();
                 echo json_encode(["status" => true, "message" => "Success", "errors" => $errorBag]);
+            } elseif ($request[0]["HTTP_REQUEST_ACTION"] == 'HTTP_REQUEST_ASSIGN_KIT') {
+                $staff = $request[0]["TEST"];
+                $errorBag = [];
+                if (!$staff) {
+                    echo json_encode(["status" => false, "message" => "No valid Test in your request", "errors" => $errorBag]);
+                    exit();
+                }
+                //CONTINUE WITH CODE
+                $db->connect()->beginTransaction();
+                //add stock to store
+                foreach ($request as $key => $value) {
+                    if ($key == 0)
+                        continue;
+                    $product = $value["product"];
+                    $quantity = $value["quantity"];
+                    //get the current balance for this product and this staff
+                    $query = $db->connect()->prepare("SELECT ust.balance,ust.unit,p.name as productName FROM user_stocks
+                    JOIN products p ON ust.product_id=p.id WHERE ust.owner_id = :owner AND ust.product_id = :product");
+                    $query->bindParam(":owner", $staff);
+                    $query->bindParam(":product", $product);
+                    $query->execute();
+                    $ownerStock = $query->fetch(PDO::FETCH_OBJ);
+                    if ($ownerStock->unit < $quantity) {
+                        $errorBag[] = "Insufficient Stock Balance for $productName, Current Stock Balance: {$ownerStock->unit}, Quantity to assign: $quantity";
+                    }
+
+
+                } //end of foreach
             }
 
         } catch (Exception $e) {

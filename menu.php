@@ -189,7 +189,7 @@ endswitch;
 
                     <?php if ($_SESSION['role_id'] == 105): ?>
                         <div class="sb-sidenav-menu-heading">Lab Scientist Menu</div>
-                        <a class="nav-link" href="pendingLabDoc.php">
+                        <a class="nav-link" href="pendingLabTest.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                             Pending Lab Test
                         </a>

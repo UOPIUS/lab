@@ -86,7 +86,7 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
                                             disabled>
                                     </div>
                                     <input type="hidden" id="_token" value="<?= $_SESSION['token'] ?>">
-                                    <input type="hidden" id="userRef" value="<?= filter_input(INPUT_GET, 'ini_id') ?>">
+                                    <input type="hidden" id="userRef" value="<?= filter_input(INPUT_GET, 'refx') ?>">
                                     <div class="col-md-12 m-2" id='s1response'></div>
                                 </div>
                                 <div class="table-responsive">
@@ -145,6 +145,7 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="shadow p-3 mb-5 bg-white rounded">
+
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
@@ -224,58 +225,64 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 shadow p-2 mb-5 bg-white rounded">
-                            <form>
-                                <div class="form-group">
-                                    <label for="category" class="col-form-label">Category:</label>
-                                    <select class="form-control" id="category">
-                                        <option value="">Choose...</option>
-                                    </select>
+                    <button class="btn btn-pill btn-outline-dark btn-air-dark float-right mb-2" onclick="addRows()"
+                                type="button">
+                                <i class="fa fa-plus-circle"></i>&nbsp;Add item
+                            </button>
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" id="stockForm">
+                                
+                                <div class="table-responsive-lg">
+                                    <table class="table table-bordered" id="stockTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productTable">
+                                            <tr>
+                                                <td id="col0">
+                                                    <select name="category[]" class="form-control"
+                                                        onchange="browseProduct(this)">
+                                                        <option value="">Choose...</option>
+                                                        <?php
+                                                        $categories = $class->rawQuery("SELECT id, name FROM inventory_categories WHERE status = 1");
+                                                        foreach ($categories as $category) {
+                                                            echo '<option value="' . $category->id . '">' . $category->name . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </td>
+                                                <td id="col1">
+                                                    <select name="product[]" class="form-control"
+                                                        onchange="chooseProduct(this)">
+                                                        <option value="">Choose...</option>
+                                                    </select>
+                                                </td>
+                                                
+                                                <td id="col2">
+                                                    <input type="number" name="quantity[]" class="form-control">
+                                                </td>
+
+                                                <td id="col3">
+                                                    <button class="btn-danger btn" onclick="removeRow(this)"
+                                                        type="button">
+                                                        Remove
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="form-group">
-                                    <label for="kit" class="col-form-label">Item:</label>
-                                    <select class="form-control" id="kit">
-                                        <option value="">Choose...</option>
-                                    </select>
+                                <div class="text-center">
+                                    <button id="finalSubmitStockRequest" class="btn btn-primary">Submit</button>
                                 </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Quantity</label>
-                                    <input type="number" class="form-control" id="quantity">
-                                </div>
-                                <button type="button" class="btn btn-primary">Add</button>
+
                             </form>
-                        </div>
-                        <div class="col-md-6 shadow p-2 mb-5 bg-white rounded">
-                            <h4 class="text-center">Selected items</h4>
-                            <div id="testList">
-                                <!-- Test list will be populated here -->
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Kit</th>
-                                            <th>Quantity</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="selectedKitList">
-                                        <!-- Test list will be populated here -->
-                                        <tr>
-                                            <td>Syringe</td>
-                                            <td>4</td>
-                                            <td><button><i class="fas fa-times-circle"></i></button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -450,6 +457,88 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
             modal.find('.modal-title').text('Add Test Kits to Lab Test')
             modal.find('.modal-body input').val(recipient)
         })
+    </script>
+
+        <script>
+        window.onload = () => {
+            document.getElementById("stockForm").addEventListener('submit', (finalEvent) => {
+                let formElem = finalEvent.currentTarget;
+                finalEvent.preventDefault();
+                var payload = [];
+                swal({
+                    title: "Are you sure?",
+                    text: "You are about to Assign this kits to this Test?. This operation cannot be reversed or edited.",
+                    icon: "warning",
+                    buttons: ["No, Cancel", "Yes Continue"],
+                    dangerMode: true,
+                })
+                    .then((proceed) => {
+                        if (proceed) {
+                            const btn = document.getElementById("finalSubmitStockRequest");
+                            btn.disabled = true;
+                            btn.innerHTML = `<progress></progress>`;
+                            let tableBodyRef = document.getElementById('stockTable').getElementsByTagName(
+                                'tbody')[0];
+                            const rows = tableBodyRef.querySelectorAll("tr");
+                            //iterate and bring out values entered
+                            payload.push({
+                                "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_KIT",
+                                "TEST": document.getElementById("userRef").value
+                            });
+                            rows.forEach(function (row) {
+                                var cols = row.querySelectorAll("td");
+                                payload.push({
+                                    "category": cols[0].getElementsByTagName("select")[0]
+                                        .value,
+                                    "product": cols[1].getElementsByTagName("select")[0]
+                                        .value,
+                                    "quantity": cols[2].getElementsByTagName("input")[0]
+                                        .value
+                                });
+                            });
+                            const data = JSON.stringify(payload);
+                            console.log(data);
+                            let xhr = new XMLHttpRequest();
+                            xhr.open('POST', '../request/xmlHttp.php');
+                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            xhr.send(data);
+                            xhr.onload = function () {
+                                if (xhr.status != 200) {
+                                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                                } else {
+                                    btn.disabled = false;
+                                    btn.innerHTML = "Submit";
+                                    const detail = JSON.parse(xhr.responseText);
+                                    if (detail.status) {
+                                        formElem.reset();
+                                        swal({
+                                            title: "Alert",
+                                            text: detail.message,
+                                            icon: 'success',
+                                            timer: 2000
+                                        });
+                                        window.location.href = "/inventory/assign_inventory.php";
+                                    } else {
+                                        var wrapper = document.createElement('div');
+                                        wrapper.innerHTML = detail.errors.map(displayError);
+                                        swal({
+                                          title: 'Error',
+                                          text: detail.message,
+                                          content: wrapper,
+                                          icon: "error",
+                                        });
+                                    }
+                                }
+                            };
+                        } else {
+                            console.log("Operation Cancelled")
+                        }
+                    });
+            })
+        }
+        function displayError(value, index, array){
+            return "<p>"+value+"</p>"
+        }
     </script>
 </body>
 

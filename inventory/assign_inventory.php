@@ -4,7 +4,7 @@ if ($class->checkSession($_SESSION['user_id']) === false)
     header('location: ../logout.php');
 
 $config = $class->fetchSettings();
-$userList = $class->rawQuery("SELECT user_id, full_name FROM users_tbl WHERE role_id = 105");
+$userList = $class->rawQuery("SELECT user_id, full_name FROM users_tbl WHERE role_id = 108");
 ?>
 <!DOCTYPE html>
 <html lang="en">
