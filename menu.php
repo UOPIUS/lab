@@ -124,24 +124,7 @@ endswitch;
                         </a>
 
                     <?php endif; ?>
-                    <!-- Adhoc Roles Added to Cashier --
-                <?php if ($_SESSION['role_id'] == 103): ?>
-                <div class="sb-sidenav-menu-heading">Front Desk Menu</div>
-                <!--
-                <a class="nav-link" href="fd_clients.php">
-                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                    Clients
-                </a>
-                --
-                <a class="nav-link" href="fd_testreports.php">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                    Lab
-                </a>
-                <a class="nav-link" href="fd_lab_test.php">
-                    <div class="sb-nav-link-icon"><i class="fas fa fa-bath"></i></div>
-                    Tests
-                </a>
-                <?php endif; ?>
+
                 <!-- Adhoc Roles Added to Cashier Stops -->
 
                     <?php if ($_SESSION['role_id'] == 1071): ?>
@@ -252,7 +235,11 @@ endswitch;
                     
                     <a class="nav-link" href="/inventory/assigned_history.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Assigned Items
+                        Assigned History
+                    </a>
+                     <a class="nav-link" href="/inventory/user_stocks.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        User Assigned Stocks
                     </a>
                 <?php endif ?>
             </div>

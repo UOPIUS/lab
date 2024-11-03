@@ -65,9 +65,7 @@ $config = $class->fetchSettings();
                                             <tr>
                                                 <td><?= $i++ ?></td>
                                                 <td>
-                                                    <a href="stock_timeline.php?idx=<?= $vl->id ?>">
-                                                        <?= $vl->name ?>
-                                                    </a>
+                                                    <?= $vl->name ?>
                                                 </td>
                                                 <td><?= $vl->category_name ?></td>
                                                 <td><?= number_format($vl->balance, 2) ?>&nbsp;<?= $vl->unit ?>(s)</td>
