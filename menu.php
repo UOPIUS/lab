@@ -205,10 +205,6 @@ endswitch;
                             <div class="sb-nav-link-icon"><i class="fa fa-cog"></i></div>
                             Setup Templates
                         </a>
-                        <a class="nav-link" href="/inventory/user_stocks.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
-                            Assigned Kits
-                        </a>
 
                     <?php endif; ?>
                     <!-- Lab Scientist Menu Ends -->
@@ -246,6 +242,18 @@ endswitch;
                         User Assigned Stocks
                     </a>
                 <?php endif ?>
+                <?php if($_SESSION['role_id'] == 108): ?>
+                    <div class="sb-sidenav-menu-heading">Lab Technician Menu</div>
+                        <a class="nav-link" href="/pendingLabTest.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+                            Pending Lab Test
+                        </a>
+                        
+                        <a class="nav-link" href="/inventory/user_stocks.php">
+                            <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
+                            Assigned Kits
+                        </a>
+                <?php endforeach; ?>
             </div>
         </div>
         <div class="sb-sidenav-footer">

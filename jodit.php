@@ -8,6 +8,8 @@ if (!($_SESSION['user_id'] && $_SESSION['role_id']))
 $config = $class->fetch('settings');
 $txref = $class->simple_encrypt(trim(htmlentities(filter_input(INPUT_GET, 'refx'))), 'd');
 $tranx = $class->fetch('tests_taken', " WHERE id = '$txref'");
+
+
 $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
 
 ?>
@@ -162,9 +164,9 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $tests = $class->fetchAll("tests_taken", " WHERE tranx_id = '$txref'");
-                                            foreach ($tests as $t):
-                                                $testInfo = $class->fetch('sub_labtest_tbl', " WHERE id = '$t->test_id'");
+                                            <?php 
+                                                $t = $tranx;
+                                                $testInfo = $class->fetch('sub_labtest_tbl', " WHERE id = '$tranx->test_id'");
                                                 $testCategory = $testInfo->labtest_id;
                                                 ?>
                                                 <tr>
@@ -201,7 +203,7 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
                                                             echo "<i class='fa fa-times text-danger'></i>"; ?>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
