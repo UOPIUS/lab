@@ -11,7 +11,11 @@ $tranx = $class->fetch('tests_taken', " WHERE id = '$txref'");
 
 
 $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
-
+$t = $tranx;
+$testInfo = $class->fetch('sub_labtest_tbl', " WHERE id = '$tranx->test_id'");
+$testCategory = $testInfo->labtest_id;
+                  
+$pformTestName = $testInfo->name;                              
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +42,7 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
         <div id="layoutSidenav_content">
             <main>
                 <div class="p-2">
-                    <h4><i class="fas fa-user mr-1"></i> Test ID: <?= $txref ?></h4>
+                    <h4><i class="fas fa-user mr-1"></i> Test ID: <?=$pformTestName. " -- Reference: " $txref ?></h4>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
@@ -164,14 +168,8 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php 
-                                                $t = $tranx;
-                                                $testInfo = $class->fetch('sub_labtest_tbl', " WHERE id = '$tranx->test_id'");
-                                                $testCategory = $testInfo->labtest_id;
-                                                ?>
                                                 <tr>
-                                                    <td><?php $pformTestName = $testInfo->name;
-                                                    echo $pformTestName; ?>
+                                                    <td><?php echo $pformTestName; ?>
                                                     </td>
                                                     <td>
                                                         <?php if ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105) { ?>
@@ -379,7 +377,7 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
                 category: e
             };
             var categories = document.getElementById("template");
-            categories.innerHTML = "<option value=''>-Select - </option>"
+            categories.innerHTML = "<option value=''> -Select - </option>"
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'request/ajax_template.php');
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
