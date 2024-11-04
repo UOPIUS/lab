@@ -212,15 +212,17 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                         continue;
                     $product = $value["product"];
                     $quantity = $value["quantity"];
+
+                    $productName = $db->connect()->query("SELECT name FROM product WHERE id = '$product'")->fetchColumn();
                     //get the current balance for this product and this staff
-                    $query = $db->connect()->prepare("SELECT ust.balance,ust.unit,p.name as productName FROM user_stocks ust
-                    JOIN products p ON ust.product_id=p.id WHERE ust.owner_id = :owner AND ust.product_id = :product");
+                    $query = $db->connect()->prepare("SELECT ust.balance,ust.unit FROM user_stocks ust
+                    WHERE ust.owner_id = :owner AND ust.product_id = :product");
                     $query->bindParam(":owner", $user);
                     $query->bindParam(":product", $product);
                     $query->execute();
                     $ownerStock = $query->fetch(PDO::FETCH_OBJ);
                     if (!$ownerStock) {
-                        $errorBag[] = "No stock found for $productName";
+                        $errorBag[] = "No stock found";
                         continue;
                     }
                     if ($ownerStock->unit < $quantity) {

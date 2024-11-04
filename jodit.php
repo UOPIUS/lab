@@ -515,7 +515,7 @@ $pformTestName = $testInfo->name;
                                         wrapper.innerHTML = detail.errors.map(displayError);
                                         swal({
                                             title: 'Error',
-                                            text: detail.message,
+                                            text: "",
                                             content: wrapper,
                                             icon: "error",
                                         });
