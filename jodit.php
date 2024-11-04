@@ -472,7 +472,7 @@ $pformTestName = $testInfo->name;
                             const rows = tableBodyRef.querySelectorAll("tr");
                             //iterate and bring out values entered
                             payload.push({
-                                "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_STOCK",
+                                "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_KIT",
                                 "TEST": recipient
                             });
                             rows.forEach(function (row) {
