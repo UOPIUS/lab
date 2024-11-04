@@ -483,9 +483,8 @@ $pformTestName = $testInfo->name;
                                         .value,
                                     "product": cols[1].getElementsByTagName("select")[0]
                                         .value,
-                                    "unit": cols[2].getElementsByTagName("input")[0]
-                                        .value,
-                                    "quantity": cols[3].getElementsByTagName("input")[0]
+
+                                    "quantity": cols[2].getElementsByTagName("input")[0]
                                         .value
                                 });
                             });
