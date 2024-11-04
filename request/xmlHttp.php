@@ -213,7 +213,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $product = $value["product"];
                     $quantity = $value["quantity"];
                     //get the current balance for this product and this staff
-                    $query = $db->connect()->prepare("SELECT ust.balance,ust.unit,p.name as productName FROM user_stocks
+                    $query = $db->connect()->prepare("SELECT ust.balance,ust.unit,p.name as productName FROM user_stocks ust
                     JOIN products p ON ust.product_id=p.id WHERE ust.owner_id = :owner AND ust.product_id = :product");
                     $query->bindParam(":owner", $staff);
                     $query->bindParam(":product", $product);
@@ -221,6 +221,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $ownerStock = $query->fetch(PDO::FETCH_OBJ);
                     if ($ownerStock->unit < $quantity) {
                         $errorBag[] = "Insufficient Stock Balance for $productName, Current Stock Balance: {$ownerStock->unit}, Quantity to assign: $quantity";
+                        continue;
                     }
 
 
