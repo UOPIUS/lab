@@ -253,7 +253,7 @@ endswitch;
                             <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
                             Assigned Kits
                         </a>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
         <div class="sb-sidenav-footer">
