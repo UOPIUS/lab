@@ -225,6 +225,12 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
 
                 } //end of foreach
+                echo json_encode([
+                    "status" => false,
+                    "message" => "Success",
+                    "errors" => $errorBag
+                ]);
+                exit();
             }
 
         } catch (Exception $e) {

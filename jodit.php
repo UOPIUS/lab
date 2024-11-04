@@ -13,8 +13,8 @@ $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
 $t = $tranx;
 $testInfo = $class->fetch('sub_labtest_tbl', " WHERE id = '$tranx->test_id'");
 $testCategory = $testInfo->labtest_id;
-                  
-$pformTestName = $testInfo->name;                              
+
+$pformTestName = $testInfo->name;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +41,7 @@ $pformTestName = $testInfo->name;
         <div id="layoutSidenav_content">
             <main>
                 <div class="p-4">
-                    <h4>Test:<?=$pformTestName. " -- Reference: ". $txref ?></h4>
+                    <h4>Test:<?= $pformTestName . " -- Reference: " . $txref ?></h4>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
@@ -102,9 +102,11 @@ $pformTestName = $testInfo->name;
                                                     Test to Run
                                                 </th>
                                             </tr>
-                                            <tr><td><?=$pformTestName ?></td></tr>
+                                            <tr>
+                                                <td><?= $pformTestName ?></td>
+                                            </tr>
                                         </thead>
-                                       
+
                                     </table>
                                 </div>
                             </div>
@@ -115,7 +117,8 @@ $pformTestName = $testInfo->name;
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <button type="button" class="btn btn-primary float-right btn-lg"
-                                            data-toggle="modal" data-target="#testKitModal" data-refx="<?= filter_input(INPUT_GET, 'refx') ?>">
+                                            data-toggle="modal" data-target="#testKitModal"
+                                            data-refx="<?= filter_input(INPUT_GET, 'refx') ?>">
                                             <i class="fa fa-plus-circle"></i>&nbsp;Add Test Kit
                                         </button>
                                     </div>
@@ -159,40 +162,40 @@ $pformTestName = $testInfo->name;
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                    <td><?php echo $pformTestName; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105) { ?>
-                                                            <button type="button" class="btn btn-primary btn-sm"
-                                                                data-toggle="modal" data-pformtestname="<?= $pformTestName ?>"
-                                                                data-pformtestkey="<?= $t->id ?>"
-                                                                data-pformtestdetail="<?= $t->test_result ?>"
-                                                                data-categoryid="<?= $testCategory ?>"
-                                                                data-target="#makeReportModal">Edit Result<i
-                                                                    class="fa fa-edit ml-1"></i>
-                                                            </button>
-                                                        <?php } else
-                                                            "<button class='btn btn-default btn-sm'>NA</button>"; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if ($t->test_result && ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105)) { ?>
-                                                            <a href="#" data-xf="<?= $t->tranx_id ?>" data-zf="<?= $t->id ?>"
-                                                                class="btn btn-warning btn-sm aLink">Click
-                                                                for
-                                                                Test Print<i class="fa fa-play-circle ml-1"></i>
-                                                            </a>
-                                                        <?php } else
-                                                            echo "NA"; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if ($t->test_result)
-                                                            echo "<i class='fa fa-check-circle text-success'></i>";
-                                                        else
-                                                            echo "<i class='fa fa-times text-danger'></i>"; ?>
-                                                    </td>
-                                                </tr>
-                                           
+                                            <tr>
+                                                <td><?php echo $pformTestName; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105) { ?>
+                                                        <button type="button" class="btn btn-primary btn-sm"
+                                                            data-toggle="modal" data-pformtestname="<?= $pformTestName ?>"
+                                                            data-pformtestkey="<?= $t->id ?>"
+                                                            data-pformtestdetail="<?= $t->test_result ?>"
+                                                            data-categoryid="<?= $testCategory ?>"
+                                                            data-target="#makeReportModal">Edit Result<i
+                                                                class="fa fa-edit ml-1"></i>
+                                                        </button>
+                                                    <?php } else
+                                                        "<button class='btn btn-default btn-sm'>NA</button>"; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($t->test_result && ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105)) { ?>
+                                                        <a href="#" data-xf="<?= $t->tranx_id ?>" data-zf="<?= $t->id ?>"
+                                                            class="btn btn-warning btn-sm aLink">Click
+                                                            for
+                                                            Test Print<i class="fa fa-play-circle ml-1"></i>
+                                                        </a>
+                                                    <?php } else
+                                                        echo "NA"; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($t->test_result)
+                                                        echo "<i class='fa fa-check-circle text-success'></i>";
+                                                    else
+                                                        echo "<i class='fa fa-times text-danger'></i>"; ?>
+                                                </td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -217,63 +220,62 @@ $pformTestName = $testInfo->name;
                 </div>
                 <div class="modal-body">
                     <button class="btn btn-pill btn-outline-dark btn-air-dark float-right mb-2" onclick="addRows()"
-                                type="button">
-                                <i class="fa fa-plus-circle"></i>&nbsp;Add item
-                            </button>
+                        type="button">
+                        <i class="fa fa-plus-circle"></i>&nbsp;Add item
+                    </button>
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" id="stockForm">
-                                
-                                <div class="table-responsive-lg">
-                                    <table class="table table-bordered" id="stockTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Category</th>
-                                                <th>Product</th>
-                                                <th>Quantity</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="productTable">
-                                            <tr>
-                                                <td id="col0">
-                                                    <select name="category[]" class="form-control"
-                                                        onchange="browseProduct(this)">
-                                                        <option value="">Choose...</option>
-                                                        <?php
-                                                        $categories = $class->rawQuery("SELECT id, name FROM inventory_categories WHERE status = 1");
-                                                        foreach ($categories as $category) {
-                                                            echo '<option value="' . $category->id . '">' . $category->name . '</option>';
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </td>
-                                                <td id="col1">
-                                                    <select name="product[]" class="form-control"
-                                                        onchange="chooseProduct(this)">
-                                                        <option value="">Choose...</option>
-                                                    </select>
-                                                </td>
-                                                
-                                                <td id="col2">
-                                                    <input type="number" name="quantity[]" class="form-control">
-                                                </td>
 
-                                                <td id="col3">
-                                                    <button class="btn-danger btn" onclick="removeRow(this)"
-                                                        type="button">
-                                                        Remove
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="text-center">
-                                    <button id="finalSubmitStockRequest" class="btn btn-primary">Submit</button>
-                                </div>
+                        <div class="table-responsive-lg">
+                            <table class="table table-bordered" id="stockTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productTable">
+                                    <tr>
+                                        <td id="col0">
+                                            <select name="category[]" class="form-control"
+                                                onchange="browseProduct(this)">
+                                                <option value="">Choose...</option>
+                                                <?php
+                                                $categories = $class->rawQuery("SELECT id, name FROM inventory_categories WHERE status = 1");
+                                                foreach ($categories as $category) {
+                                                    echo '<option value="' . $category->id . '">' . $category->name . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td id="col1">
+                                            <select name="product[]" class="form-control"
+                                                onchange="chooseProduct(this)">
+                                                <option value="">Choose...</option>
+                                            </select>
+                                        </td>
 
-                            </form>
+                                        <td id="col2">
+                                            <input type="number" name="quantity[]" class="form-control">
+                                        </td>
+
+                                        <td id="col3">
+                                            <button class="btn-danger btn" onclick="removeRow(this)" type="button">
+                                                Remove
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center">
+                            <button id="finalSubmitStockRequest" class="btn btn-primary">Submit</button>
+                        </div>
+
+                    </form>
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -447,7 +449,7 @@ $pformTestName = $testInfo->name;
             var modal = $(this)
             modal.find('.modal-title').text('Add Test Kits to Lab Test')
             modal.find('.modal-body input').val(recipient)
-            
+
             document.getElementById("stockForm").addEventListener('submit', (finalEvent) => {
                 let formElem = finalEvent.currentTarget;
                 finalEvent.preventDefault();
@@ -464,8 +466,9 @@ $pformTestName = $testInfo->name;
                             const btn = document.getElementById("finalSubmitStockRequest");
                             btn.disabled = true;
                             btn.innerHTML = `<progress></progress>`;
-                            let tableBodyRef = document.getElementById('stockTable').getElementsByTagName(
-                                'tbody')[0];
+                            let tableBodyRef = document.getElementById('stockTable')
+                                .getElementsByTagName(
+                                    'tbody')[0];
                             const rows = tableBodyRef.querySelectorAll("tr");
                             //iterate and bring out values entered
                             payload.push({
@@ -475,11 +478,13 @@ $pformTestName = $testInfo->name;
                             rows.forEach(function (row) {
                                 var cols = row.querySelectorAll("td");
                                 payload.push({
-                                    "category": cols[0].getElementsByTagName("select")[0]
+                                    "category": cols[0].getElementsByTagName("select")[
+                                        0]
                                         .value,
                                     "product": cols[1].getElementsByTagName("select")[0]
                                         .value,
-                                    "unit": cols[2].getElementsByTagName("input")[0].value,
+                                    "unit": cols[2].getElementsByTagName("input")[0]
+                                        .value,
                                     "quantity": cols[3].getElementsByTagName("input")[0]
                                         .value
                                 });
@@ -510,10 +515,10 @@ $pformTestName = $testInfo->name;
                                         var wrapper = document.createElement('div');
                                         wrapper.innerHTML = detail.errors.map(displayError);
                                         swal({
-                                          title: 'Error',
-                                          text: detail.message,
-                                          content: wrapper,
-                                          icon: "error",
+                                            title: 'Error',
+                                            text: detail.message,
+                                            content: wrapper,
+                                            icon: "error",
                                         });
                                     }
                                 }
