@@ -198,9 +198,9 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                 $db->connect()->commit();
                 echo json_encode(["status" => true, "message" => "Success", "errors" => $errorBag]);
             } elseif ($request[0]["HTTP_REQUEST_ACTION"] == 'HTTP_REQUEST_ASSIGN_KIT') {
-                $staff = $request[0]["TEST"];
+                $test = $request[0]["TEST"];
                 $errorBag = [];
-                if (!$staff) {
+                if (!$test) {
                     echo json_encode(["status" => false, "message" => "No valid Test in your request", "errors" => $errorBag]);
                     exit();
                 }
@@ -215,7 +215,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     //get the current balance for this product and this staff
                     $query = $db->connect()->prepare("SELECT ust.balance,ust.unit,p.name as productName FROM user_stocks ust
                     JOIN products p ON ust.product_id=p.id WHERE ust.owner_id = :owner AND ust.product_id = :product");
-                    $query->bindParam(":owner", $staff);
+                    $query->bindParam(":owner", $user);
                     $query->bindParam(":product", $product);
                     $query->execute();
                     $ownerStock = $query->fetch(PDO::FETCH_OBJ);
