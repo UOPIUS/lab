@@ -42,7 +42,7 @@ $pformTestName = $testInfo->name;
         <div id="layoutSidenav_content">
             <main>
                 <div class="p-2">
-                    <h4><i class="fas fa-user mr-1"></i> Test ID: <?=$pformTestName. " -- Reference: " $txref ?></h4>
+                    <h4><i class="fas fa-user mr-1"></i> Test ID: <?=$pformTestName. " -- Reference: ". $txref ?></h4>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
