@@ -219,6 +219,10 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->bindParam(":product", $product);
                     $query->execute();
                     $ownerStock = $query->fetch(PDO::FETCH_OBJ);
+                    if (!$ownerStock) {
+                        $errorBag[] = "No stock found for $productName";
+                        continue;
+                    }
                     if ($ownerStock->unit < $quantity) {
                         $errorBag[] = "Insufficient Stock Balance for $productName, Current Stock Balance: {$ownerStock->unit}, Quantity to assign: $quantity";
                         continue;
