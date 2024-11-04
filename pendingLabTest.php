@@ -22,7 +22,7 @@ LEFT JOIN sub_labtest_tbl lt ON tt.test_id = lt.id
 JOIN clients_tbl c ON tt.client_id = c.ref WHERE tt.status = 0 $condition ORDER BY tt.created_at DESC LIMIT 500";
 
 $sales = $class->rawQuery($query);
-
+$config = $class->fetchSettings();
 ?>
 <!DOCTYPE html>
 <html lang="en">
