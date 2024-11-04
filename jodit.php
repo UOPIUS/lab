@@ -473,7 +473,7 @@ $pformTestName = $testInfo->name;
                             //iterate and bring out values entered
                             payload.push({
                                 "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_STOCK",
-                                "STAFF": document.getElementById("chosenStaff").value
+                                "TEST": recipient
                             });
                             rows.forEach(function (row) {
                                 var cols = row.querySelectorAll("td");
