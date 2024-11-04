@@ -9,7 +9,6 @@ $config = $class->fetch('settings');
 $txref = $class->simple_encrypt(trim(htmlentities(filter_input(INPUT_GET, 'refx'))), 'd');
 $tranx = $class->fetch('tests_taken', " WHERE id = '$txref'");
 
-
 $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
 $t = $tranx;
 $testInfo = $class->fetch('sub_labtest_tbl', " WHERE id = '$tranx->test_id'");
@@ -457,88 +456,6 @@ $pformTestName = $testInfo->name;
             modal.find('.modal-title').text('Add Test Kits to Lab Test')
             modal.find('.modal-body input').val(recipient)
         })
-    </script>
-
-        <script>
-        window.onload = () => {
-            document.getElementById("stockForm").addEventListener('submit', (finalEvent) => {
-                let formElem = finalEvent.currentTarget;
-                finalEvent.preventDefault();
-                var payload = [];
-                swal({
-                    title: "Are you sure?",
-                    text: "You are about to Assign this kits to this Test?. This operation cannot be reversed or edited.",
-                    icon: "warning",
-                    buttons: ["No, Cancel", "Yes Continue"],
-                    dangerMode: true,
-                })
-                    .then((proceed) => {
-                        if (proceed) {
-                            const btn = document.getElementById("finalSubmitStockRequest");
-                            btn.disabled = true;
-                            btn.innerHTML = `<progress></progress>`;
-                            let tableBodyRef = document.getElementById('stockTable').getElementsByTagName(
-                                'tbody')[0];
-                            const rows = tableBodyRef.querySelectorAll("tr");
-                            //iterate and bring out values entered
-                            payload.push({
-                                "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_KIT",
-                                "TEST": document.getElementById("userRef").value
-                            });
-                            rows.forEach(function (row) {
-                                var cols = row.querySelectorAll("td");
-                                payload.push({
-                                    "category": cols[0].getElementsByTagName("select")[0]
-                                        .value,
-                                    "product": cols[1].getElementsByTagName("select")[0]
-                                        .value,
-                                    "quantity": cols[2].getElementsByTagName("input")[0]
-                                        .value
-                                });
-                            });
-                            const data = JSON.stringify(payload);
-                            console.log(data);
-                            let xhr = new XMLHttpRequest();
-                            xhr.open('POST', '../request/xmlHttp.php');
-                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                            xhr.send(data);
-                            xhr.onload = function () {
-                                if (xhr.status != 200) {
-                                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
-                                } else {
-                                    btn.disabled = false;
-                                    btn.innerHTML = "Submit";
-                                    const detail = JSON.parse(xhr.responseText);
-                                    if (detail.status) {
-                                        formElem.reset();
-                                        swal({
-                                            title: "Alert",
-                                            text: detail.message,
-                                            icon: 'success',
-                                            timer: 2000
-                                        });
-                                        window.location.href = "/inventory/assign_inventory.php";
-                                    } else {
-                                        var wrapper = document.createElement('div');
-                                        wrapper.innerHTML = detail.errors.map(displayError);
-                                        swal({
-                                          title: 'Error',
-                                          text: detail.message,
-                                          content: wrapper,
-                                          icon: "error",
-                                        });
-                                    }
-                                }
-                            };
-                        } else {
-                            console.log("Operation Cancelled")
-                        }
-                    });
-            })
-        }
-        function displayError(value, index, array){
-            return "<p>"+value+"</p>"
-        }
     </script>
 </body>
 
