@@ -222,7 +222,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->execute();
                     $ownerStock = $query->fetch(PDO::FETCH_OBJ);
                     if (!$ownerStock) {
-                        $errorBag[] = "No stock found";
+                        $errorBag[] = "No stock found for $productName";
                         continue;
                     }
                     if ($ownerStock->unit < $quantity) {
