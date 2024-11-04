@@ -181,10 +181,10 @@ $userList = $class->rawQuery("SELECT user_id, full_name FROM users_tbl WHERE rol
                                         var wrapper = document.createElement('div');
                                         wrapper.innerHTML = detail.errors.map(displayError);
                                         swal({
-                                          title: 'Error',
-                                          text: detail.message,
-                                          content: wrapper,
-                                          icon: "error",
+                                            title: 'Error',
+                                            text: detail.message,
+                                            content: wrapper,
+                                            icon: "error",
                                         });
                                     }
                                 }
@@ -194,9 +194,6 @@ $userList = $class->rawQuery("SELECT user_id, full_name FROM users_tbl WHERE rol
                         }
                     });
             })
-        }
-        function displayError(value, index, array){
-            return "<p>"+value+"</p>"
         }
     </script>
 </body>

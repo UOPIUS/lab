@@ -334,7 +334,9 @@ function browseProduct(param) {
         }
     });
 }
-
+function displayError(value, index, array) {
+  return "<p>" + value + "</p>";
+}
 function chooseProduct(e) {
   // TODO: Make an Ajax request to fetch the product current stock
   var id = e.options[e.selectedIndex].value;
