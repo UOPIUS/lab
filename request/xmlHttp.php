@@ -240,7 +240,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $temp = function ($quantity, $rate) use ($ownerStock) {
                         $newRate = $ownerStock->rate + $quantity;
                         $remainder = $newRate % $rate;
-                        $units = round($newRate / $rate, 2);
+                        $units = round($newRate / $rate, 0);
                         $balance = $ownerStock->balance - $units;
                         return [$remainder, $balance];
                     };
