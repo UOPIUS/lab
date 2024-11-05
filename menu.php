@@ -189,7 +189,7 @@ endswitch;
 
                     <?php if ($_SESSION['role_id'] == 105): ?>
                         <div class="sb-sidenav-menu-heading">Lab Scientist Menu</div>
-                        <a class="nav-link" href="/pendingLabTest.php">
+                        <a class="nav-link" href="/pendingLabDoc.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                             Pending Lab Test
                         </a>
@@ -242,17 +242,17 @@ endswitch;
                         User Assigned Stocks
                     </a>
                 <?php endif ?>
-                <?php if($_SESSION['role_id'] == 108): ?>
+                <?php if ($_SESSION['role_id'] == 108): ?>
                     <div class="sb-sidenav-menu-heading">Lab Technician Menu</div>
-                        <a class="nav-link" href="/pendingLabTest.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
-                            Pending Lab Test
-                        </a>
-                        
-                        <a class="nav-link" href="/inventory/user_stocks.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
-                            Assigned Kits
-                        </a>
+                    <a class="nav-link" href="/pendingLabTest.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+                        Pending Lab Test
+                    </a>
+
+                    <a class="nav-link" href="/inventory/user_stocks.php">
+                        <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
+                        Assigned Kits
+                    </a>
                 <?php endif; ?>
             </div>
         </div>
