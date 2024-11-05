@@ -240,7 +240,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $temp = function ($quantity, $rate) use ($ownerStock) {
                         $newRate = $ownerStock->rate + $quantity;
                         $remainder = $newRate % $rate;
-                        $units = $newRate / $rate;
+                        $units = round($newRate / $rate, 2);
                         $balance = $ownerStock->balance - $units;
                         return [$remainder, $balance];
                     };
@@ -251,9 +251,9 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     // $query->bindParam(":quantity", $current);
                     $query->bindParam(":product", $product);
                     $query->bindParam(":owner", $user);
-                    $query->bindParam(":balance", $params[0]);
+                    $query->bindParam(":balance", $params[1]);
                     $query->bindParam(":unit", $unitMeasured);
-                    $query->bindParam(":rate", $params[1]);
+                    $query->bindParam(":rate", $params[0]);
                     $query->execute();
                 } //end of foreach
                 $db->connect()->commit();
