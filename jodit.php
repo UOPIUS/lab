@@ -103,21 +103,23 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                             <table class="table table-bordered" width="99%">
                                                 <thead>
                                                     <tr>
-                                                        <th>
-                                                            Test to Run
-                                                        </th>
+                                                        <th>#</th>
+                                                        <th>Test to Run</th>
                                                         <th>Kits</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $tests = $class->fetchAll("tests_taken", " WHERE tranx_id = '$txref'");
+                                                    <?php $tests = $class->rawQuery("SELECT tt.id, sb.name FROM tests_taken tt 
+                                                    JOIN sub_latest_tb sb ON tt.test_id = sb.id ORDER BY sb.name WHERE tt.tranx_id = '$txref' ASC");
+                                                    // $class->fetchAll("tests_taken", " WHERE tranx_id = '$txref'");
                                                     $i = 1;
                                                     foreach ($tests as $t): ?>
                                                         <tr>
                                                             <td>
-                                                                <?= $i++ . '. ' . $class->fetchColumn('sub_labtest_tbl', 'name', 'id', $t->test_id) ?>
+                                                                <?= $i++ ?>
                                                             </td>
+                                                            <td><?= $t->name ?></td>
                                                             <td>NA</td>
                                                             <td>
                                                                 <?php if ($isLabTechnician): ?>
