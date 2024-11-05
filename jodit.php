@@ -295,7 +295,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                             </table>
                         </div>
                         <div class="text-center">
-                            <button id="finalSubmitStockRequest" class="btn btn-primary" disabled>Submit</button>
+                            <button id="finalSubmitStockRequest" class="btn btn-primary">Submit</button>
                         </div>
 
                     </form>
