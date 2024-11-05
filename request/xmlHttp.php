@@ -217,7 +217,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
                     $pro = $db->connect()->query("SELECT p.name,i.quantity AS units 
                     FROM products p JOIN inventory_units i ON p.inventory_unit_id = i.id 
-                    WHERE id = '$product'")->fetch(PDO::FETCH_OBJ);
+                    WHERE p.id = '$product'")->fetch(PDO::FETCH_OBJ);
                     $productName = $pro->name;
                     $defaultUnits = $pro->units;
                     //get the current balance for this product and this staff
