@@ -238,7 +238,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     //deduct the equivalent from the user store
                     $previous = $ownerStock->balance;
                     $temp = function ($quantity, $rate) use ($ownerStock) {
-                        $newRate = $ownerStock->unit + $quantity;
+                        $newRate = $ownerStock->rate + $quantity;
                         $remainder = $newRate % $rate;
                         $units = $newRate / $rate;
                         $balance = $ownerStock->balance - $units;
