@@ -121,7 +121,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                             <td>
                                                                 <?php if ($isLabTechnician): ?>
                                                                     <button type="button"
-                                                                        class="btn btn-primary float-right btn-lg"
+                                                                        class="btn btn-primary float-right btn-sm"
                                                                         data-toggle="modal" data-target="#testKitModal"
                                                                         data-refx="<?= $t->id ?>">
                                                                         <i class="fa fa-plus-circle"></i>&nbsp;Add Test Kit
