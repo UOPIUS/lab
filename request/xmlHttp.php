@@ -251,16 +251,18 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     // $query->bindParam(":quantity", $current);
                     $query->bindParam(":product", $product);
                     $query->bindParam(":owner", $user);
-                    $query->bindParam(":balance", $params[1]);
+                    $query->bindParam(":balance", $params[0]);
                     $query->bindParam(":unit", $unitMeasured);
-                    $query->bindParam(":rate", $params[0]);
+                    $query->bindParam(":rate", $params[1]);
                     $query->execute();
                 } //end of foreach
                 $db->connect()->commit();
                 echo json_encode([
                     "status" => false,
                     "message" => "Success",
-                    "errors" => $errorBag
+                    "errors" => $errorBag,
+                    "rate" => $params[1],
+                    "balance" => $params[0]
                 ]);
                 exit();
             }
