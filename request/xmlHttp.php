@@ -242,7 +242,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->bindParam(":owner", $user);
                     $query->bindParam(":unit", $unitMeasured);
                     $query->execute();
-                    $errorBag[$unitMeasured];
+                    $errorBag[] = $unitMeasured;
 
                 } //end of foreach
                 echo json_encode([
