@@ -118,6 +118,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                             <td>
                                                                 <?= $i++ . '. ' . $class->fetchColumn('sub_labtest_tbl', 'name', 'id', $t->test_id) ?>
                                                             </td>
+                                                            <td>NA</td>
                                                             <td>
                                                                 <?php if ($isLabTechnician): ?>
                                                                     <button type="button"
@@ -292,7 +293,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                             </table>
                         </div>
                         <div class="text-center">
-                            <button id="finalSubmitStockRequest" class="btn btn-primary">Submit</button>
+                            <button id="finalSubmitStockRequest" class="btn btn-primary" disabled>Submit</button>
                         </div>
 
                     </form>
