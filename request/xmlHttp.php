@@ -235,18 +235,13 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $previous = $ownerStock->balance;
                     $current = $previous - $quantity;
                     $unitMeasured = $ownerStock->unit - $quantity;
-                    $query = $db->connect()->prepare("UPDATE user_stocks SET balance = :quantity, unit = :unit 
+                    $query = $db->connect()->prepare("UPDATE user_stocks SET unit = :unit 
                     WHERE owner_id = :owner AND product_id = :product");
-                    $query->bindParam(":quantity", $current);
+                    // $query->bindParam(":quantity", $current);
                     $query->bindParam(":product", $product);
                     $query->bindParam(":owner", $user);
                     $query->bindParam(":unit", $unitMeasured);
                     $query->execute();
-
-                    //deduct the equivalent from the main store
-                    $mainStockPrevious = $mainStock->balance;
-                    $mainStockCurrent = $mainStockPrevious - $quantity;
-                    $query = $db->connect()->prepare("UPDATE stocks SET balance = :quantity WHERE id = :id");
 
 
                 } //end of foreach
