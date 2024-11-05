@@ -215,7 +215,11 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $product = $value["product"];
                     $quantity = $value["quantity"];
 
-                    $productName = $db->connect()->query("SELECT name FROM products WHERE id = '$product'")->fetchColumn();
+                    $pro = $db->connect()->query("SELECT p.name,i.quantity AS units 
+                    FROM products p JOIN inventory_units i ON p.inventory_unit_id = i.id 
+                    WHERE id = '$product'")->fetch(PDO::FETCH_OBJ);
+                    $productName = $pro->name;
+                    $defaultUnits = $pro->units;
                     //get the current balance for this product and this staff
                     $query = $db->connect()->prepare("SELECT ust.balance,ust.unit FROM user_stocks ust
                     WHERE ust.owner_id = :owner AND ust.product_id = :product");
@@ -233,17 +237,24 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     }
                     //deduct the equivalent from the user store
                     $previous = $ownerStock->balance;
-                    $current = $previous - $quantity;
+                    $temp = function ($quantity, $rate) use ($ownerStock) {
+                        $newRate = $ownerStock->unit + $quantity;
+                        $remainder = $newRate % $rate;
+                        $units = $newRate / $rate;
+                        $balance = $ownerStock->balance - $units;
+                        return [$remainder, $balance];
+                    };
+                    $params = $temp($quantity, $defaultUnits);
                     $unitMeasured = $ownerStock->unit - $quantity;
-                    $query = $db->connect()->prepare("UPDATE user_stocks SET unit = :unit 
+                    $query = $db->connect()->prepare("UPDATE user_stocks SET unit = :unit, rate = :rate, balance = :balance
                     WHERE owner_id = :owner AND product_id = :product");
                     // $query->bindParam(":quantity", $current);
                     $query->bindParam(":product", $product);
                     $query->bindParam(":owner", $user);
+                    $query->bindParam(":balance", $params[1]);
                     $query->bindParam(":unit", $unitMeasured);
+                    $query->bindParam(":rate", $params[0]);
                     $query->execute();
-                    $errorBag[] = $unitMeasured;
-
                 } //end of foreach
                 $db->connect()->commit();
                 echo json_encode([
