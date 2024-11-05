@@ -111,7 +111,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                 </thead>
                                                 <tbody>
                                                     <?php $tests = $class->rawQuery("SELECT tt.id, sb.name FROM tests_taken tt 
-                                                    JOIN sub_latest_tb sb ON tt.test_id = sb.id WHERE tt.tranx_id = '$txref' ASC");
+                                                    JOIN sub_latest_tb sb ON tt.test_id = sb.id WHERE tt.tranx_id = '$txref'");
                                                     // $class->fetchAll("tests_taken", " WHERE tranx_id = '$txref'");
                                                     $i = 1;
                                                     foreach ($tests as $t): ?>
