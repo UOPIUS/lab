@@ -16,17 +16,6 @@ CONCAT(c.fname,' ',c.lname,' ',c.oname) AS name, c.phone,c.dob
 FROM transactions t JOIN clients_tbl c ON t.client_id = c.ref
 WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
 
-/**
-<?php $tests = $class->fetchAll("tests_taken"," WHERE tranx_id = '{$x->id}'");
-                                                    $k = 1;
-                                                    foreach($tests as $t): ?>
-<?php if($t->test_result) echo "<i class='fa fa-check-circle text-success'></i>";
-                                                        else echo "<i class='fa fa-times text-danger'></i>"; ?>
-<strong class="text-danger"><?=$k++.'.' .$class->fetchColumn('sub_labtest_tbl','name','id',$t->test_id) ?>
-</strong><br>
-
-<?php endforeach; ?>
-*/
 ?>
 <!DOCTYPE html>
 <html lang="en">

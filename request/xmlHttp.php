@@ -126,14 +126,15 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
                             $id = $db->generateRandomString(12);
                             //create product in the stocks table
-                            $query = $db->connect()->prepare("INSERT INTO user_stocks(id,product_id,owner_id, balance, user_id, unit) 
-                            VALUES (:id, :product, :owner, :quantity, :user, :unit)");
+                            $query = $db->connect()->prepare("INSERT INTO user_stocks(id,product_id,owner_id, balance, user_id, unit, rate) 
+                            VALUES (:id, :product, :owner, :quantity, :user, :unit, :rate)");
                             $query->bindParam(":id", $id);
                             $query->bindParam(":quantity", $current);
                             $query->bindParam(":product", $product);
                             $query->bindParam(":owner", $staff);
                             $query->bindParam(":user", $user);
                             $query->bindParam(":unit", $unit);
+                            $query->bindParam(":rate", $mainStock->unit);
                             $query->execute();
                             $balance = 0;
                         } else {
@@ -141,12 +142,13 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                             $previous = $ownerStock->balance;
                             $current = $previous + $quantity;
                             $unitMeasured = $ownerStock->unit + ($unit * $quantity);
-                            $query = $db->connect()->prepare("UPDATE user_stocks SET balance = :quantity, unit = :unit 
+                            $query = $db->connect()->prepare("UPDATE user_stocks SET balance = :quantity, unit = :unit, rate = :rate 
                                 WHERE owner_id = :owner AND product_id = :product");
                             $query->bindParam(":quantity", $current);
                             $query->bindParam(":product", $product);
                             $query->bindParam(":owner", $staff);
                             $query->bindParam(":unit", $unitMeasured);
+                            $query->bindParam(":rate", $mainStock->unit);
                             $query->execute();
                         }
                         //deduct the equivalent from the main store
@@ -204,7 +206,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     echo json_encode(["status" => false, "message" => "No valid Test in your request", "errors" => $errorBag]);
                     exit();
                 }
-                //CONTINUE WITH CODE
+
                 $db->connect()->beginTransaction();
                 //add stock to store
                 foreach ($request as $key => $value) {
@@ -222,13 +224,29 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->execute();
                     $ownerStock = $query->fetch(PDO::FETCH_OBJ);
                     if (!$ownerStock) {
-                        $errorBag[] = "No stock found for $productName";
+                        $errorBag[] = "No stock is currently assigned to you for $productName";
                         continue;
                     }
                     if ($ownerStock->unit < $quantity) {
                         $errorBag[] = "Insufficient Stock Balance for $productName, Current Stock Balance: {$ownerStock->unit}, Quantity to assign: $quantity";
                         continue;
                     }
+                    //deduct the equivalent from the user store
+                    $previous = $ownerStock->balance;
+                    $current = $previous - $quantity;
+                    $unitMeasured = $ownerStock->unit - $quantity;
+                    $query = $db->connect()->prepare("UPDATE user_stocks SET balance = :quantity, unit = :unit 
+                    WHERE owner_id = :owner AND product_id = :product");
+                    $query->bindParam(":quantity", $current);
+                    $query->bindParam(":product", $product);
+                    $query->bindParam(":owner", $user);
+                    $query->bindParam(":unit", $unitMeasured);
+                    $query->execute();
+
+                    //deduct the equivalent from the main store
+                    $mainStockPrevious = $mainStock->balance;
+                    $mainStockCurrent = $mainStockPrevious - $quantity;
+                    $query = $db->connect()->prepare("UPDATE stocks SET balance = :quantity WHERE id = :id");
 
 
                 } //end of foreach
