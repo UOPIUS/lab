@@ -11,6 +11,7 @@ $tranx = $class->fetch('transactions', " WHERE id = '$txref'");
 $customer = $class->fetch('clients_tbl', " WHERE ref = '$tranx->client_id'");
 
 $config = $class->fetch('settings');
+$isLabTechnician = $_SESSION['role_id'] == 108;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,24 +55,25 @@ $config = $class->fetch('settings');
                                         <span class="hidden-xs-down">Test </span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"
-                                        aria-selected="false">
-                                        <span class="hidden-sm-up">
-                                            <i class="fa fa-flask"></i>
-                                        </span>
-                                        <span class="hidden-xs-down">Check Reports</span></a>
-                                </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content pl-2">
-                                <div class="tab-pane active" id="home2" role="tabpanel">
-                                    <div class="p-4">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <label for="full_name">Full Name</label>
-                                                <input type="text" class="form-control" disabled
-                                                    value="<?= $customer->fname . " " . $customer->lname . " " . $customer->oname ?>">
+                                <li class="nav-item <?php if ($isLabTechnician)
+                                    echo 'd-none' ?>">
+                                        <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"
+                                            aria-selected="false">
+                                            <span class="hidden-sm-up">
+                                                <i class="fa fa-flask"></i>
+                                            </span>
+                                            <span class="hidden-xs-down">Check Reports</span></a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content pl-2">
+                                    <div class="tab-pane active" id="home2" role="tabpanel">
+                                        <div class="p-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="full_name">Full Name</label>
+                                                    <input type="text" class="form-control" disabled
+                                                        value="<?= $customer->fname . " " . $customer->lname . " " . $customer->oname ?>">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="oname">Gender</label>
@@ -106,7 +108,6 @@ $config = $class->fetch('settings');
                                                         </th>
                                                         <th>Kits</th>
                                                         <th></th>
-
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -114,10 +115,19 @@ $config = $class->fetch('settings');
                                                     $i = 1;
                                                     foreach ($tests as $t): ?>
                                                         <tr>
-                                                            <td><?= $i++ . '. ' . $class->fetchColumn('sub_labtest_tbl', 'name', 'id', $t->test_id) ?>
+                                                            <td>
+                                                                <?= $i++ . '. ' . $class->fetchColumn('sub_labtest_tbl', 'name', 'id', $t->test_id) ?>
                                                             </td>
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td>
+                                                                <?php if ($isLabTechnician): ?>
+                                                                    <button type="button"
+                                                                        class="btn btn-primary float-right btn-lg"
+                                                                        data-toggle="modal" data-target="#testKitModal"
+                                                                        data-refx="<?= $t->id ?>">
+                                                                        <i class="fa fa-plus-circle"></i>&nbsp;Add Test Kit
+                                                                    </button>
+                                                                <?php endif; ?>
+                                                            </td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
@@ -220,7 +230,79 @@ $config = $class->fetch('settings');
             <?php include 'footer.php' ?>
         </div>
     </div>
-    <!-- Modal starts -->
+    <!-- Test Kit Modal starts -->
+    <div class="modal fade" id="testKitModal" tabindex="-1" aria-labelledby="testKitModalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="testKitModalModalLabel">Add Test Kits</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-pill btn-outline-dark btn-air-dark float-right mb-2" onclick="addRows()"
+                        type="button">
+                        <i class="fa fa-plus-circle"></i>&nbsp;Add item
+                    </button>
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" id="stockForm">
+
+                        <div class="table-responsive-lg">
+                            <table class="table table-bordered" id="stockTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productTable">
+                                    <tr>
+                                        <td id="col0">
+                                            <select name="category[]" class="form-control"
+                                                onchange="browseProduct(this)">
+                                                <option value="">Choose...</option>
+                                                <?php
+                                                $categories = $class->rawQuery("SELECT id, name FROM inventory_categories WHERE status = 1");
+                                                foreach ($categories as $category) {
+                                                    echo '<option value="' . $category->id . '">' . $category->name . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td id="col1">
+                                            <select name="product[]" class="form-control"
+                                                onchange="chooseProduct(this)">
+                                                <option value="">Choose...</option>
+                                            </select>
+                                        </td>
+
+                                        <td id="col2">
+                                            <input type="number" name="quantity[]" class="form-control">
+                                        </td>
+
+                                        <td id="col3">
+                                            <button class="btn-danger btn" onclick="removeRow(this)" type="button">
+                                                Remove
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center">
+                            <button id="finalSubmitStockRequest" class="btn btn-primary">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Test Kit Modal ends -->
+    <!-- Test reporting Modal starts -->
 
     <div class="modal fade" id="makeReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -255,7 +337,7 @@ $config = $class->fetch('settings');
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class=" form-group col-lg-6">
                                 <label>Choose Template</label>
                                 <select class="form-control" id='template'>
                                     <option value=''>Choose...</option>
@@ -267,7 +349,7 @@ $config = $class->fetch('settings');
                                 </select>
 
                             </div>
-                            <div class="form-group col-lg-12">
+                            <div class=" form-group col-lg-12">
                                 <label>Result Analysis</label>
                                 <textarea id="templateBody" class="form-control" rows="40"
                                     placeholder="Enter Test Result ..." name="test_result"></textarea>
@@ -380,8 +462,94 @@ $config = $class->fetch('settings');
 
             });
             //
-
         });
+
+        $('#testKitModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.data('refx')
+            var modal = $(this)
+            modal.find('.modal-title').text('Add Test Kits to Lab Test')
+            modal.find('.modal-body input').val(recipient)
+
+            document.getElementById("stockForm").addEventListener('submit', (finalEvent) => {
+                let formElem = finalEvent.currentTarget;
+                finalEvent.preventDefault();
+                var payload = [];
+                swal({
+                    title: "Are you sure?",
+                    text: "You are about to add stock to your user. This operation cannot be reversed or edited. Please be sure you know what you are doing before you continue.",
+                    icon: "warning",
+                    buttons: ["No, Cancel", "Yes Continue"],
+                    dangerMode: true,
+                })
+                    .then((proceed) => {
+                        if (proceed) {
+                            const btn = document.getElementById("finalSubmitStockRequest");
+                            btn.disabled = true;
+                            btn.innerHTML = `<progress></progress>`;
+                            let tableBodyRef = document.getElementById('stockTable')
+                                .getElementsByTagName(
+                                    'tbody')[0];
+                            const rows = tableBodyRef.querySelectorAll("tr");
+                            //iterate and bring out values entered
+                            payload.push({
+                                "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_KIT",
+                                "TEST": recipient
+                            });
+                            rows.forEach(function (row) {
+                                var cols = row.querySelectorAll("td");
+                                payload.push({
+                                    "category": cols[0].getElementsByTagName("select")[
+                                        0]
+                                        .value,
+                                    "product": cols[1].getElementsByTagName("select")[0]
+                                        .value,
+
+                                    "quantity": cols[2].getElementsByTagName("input")[0]
+                                        .value
+                                });
+                            });
+                            const data = JSON.stringify(payload);
+                            console.log(data);
+                            let xhr = new XMLHttpRequest();
+                            xhr.open('POST', '../request/xmlHttp.php');
+                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            xhr.send(data);
+                            xhr.onload = function () {
+                                if (xhr.status != 200) {
+                                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                                } else {
+                                    btn.disabled = false;
+                                    btn.innerHTML = "Submit";
+                                    const detail = JSON.parse(xhr.responseText);
+                                    if (detail.status) {
+                                        formElem.reset();
+                                        swal({
+                                            title: "Alert",
+                                            text: detail.message,
+                                            icon: 'success',
+                                            timer: 2000
+                                        });
+                                        window.location.href = "/inventory/assign_inventory.php";
+                                    } else {
+                                        var wrapper = document.createElement('div');
+                                        wrapper.innerHTML = detail.errors.map(displayError);
+                                        swal({
+                                            title: 'Error',
+                                            text: "",
+                                            content: wrapper,
+                                            icon: "error",
+                                        });
+                                    }
+                                }
+                            };
+                        } else {
+                            console.log("Operation Cancelled")
+                        }
+                    });
+            })
+
+        })
     </script>
 </body>
 
