@@ -100,10 +100,10 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                             <div class="col-md-12 m-2" id='s1response'></div>
                                         </div>
                                         <div class="table-responsive">
-                                            <table class="table table-borderless">
+                                            <table class="table table-bordered" width="99%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="bg-warning text-white" colspan="3">
+                                                        <th>
                                                             Test to Run
                                                         </th>
                                                         <th>Kits</th>
