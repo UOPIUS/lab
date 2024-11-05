@@ -244,7 +244,7 @@ endswitch;
                 <?php endif ?>
                 <?php if ($_SESSION['role_id'] == 108): ?>
                     <div class="sb-sidenav-menu-heading">Lab Technician Menu</div>
-                    <a class="nav-link" href="/pendingLabTest.php">
+                    <a class="nav-link" href="/pendingLabDoc.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                         Pending Lab Test
                     </a>
