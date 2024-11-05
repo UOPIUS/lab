@@ -245,6 +245,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $errorBag[] = $unitMeasured;
 
                 } //end of foreach
+                $db->connect()->commit();
                 echo json_encode([
                     "status" => false,
                     "message" => "Success",
