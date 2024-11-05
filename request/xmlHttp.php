@@ -262,7 +262,8 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     "message" => "Success",
                     "errors" => $errorBag,
                     "rate" => $params[0],
-                    "balance" => $params[1]
+                    "balance" => $params[1],
+                    "defaultUnits" => $defaultUnits
                 ]);
                 exit();
             }
