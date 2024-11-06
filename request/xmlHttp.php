@@ -221,7 +221,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $productName = $pro->name;
                     $defaultUnits = $pro->units;
                     //get the current balance for this product and this staff
-                    $query = $db->connect()->prepare("SELECT ust.balance,ust.unit FROM user_stocks ust
+                    $query = $db->connect()->prepare("SELECT ust.balance,ust.unit,ust.rate FROM user_stocks ust
                     WHERE ust.owner_id = :owner AND ust.product_id = :product");
                     $query->bindParam(":owner", $user);
                     $query->bindParam(":product", $product);
