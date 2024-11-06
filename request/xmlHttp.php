@@ -254,6 +254,22 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->bindParam(":rate", $remainder);
                     $query->execute();
                 } //end of foreach
+                //log transaction for staff store
+                $query = $db->connect()->prepare("INSERT INTO 
+                inventory_transactions(product_id, quantity,balance_before,balance_after, cost, type,user_id,owner_id, unit)
+                VALUES (:product_id, :quantity,:balance_before,:balance_after, :cost, :type, :user, :owner, :unit)");
+                $query->bindParam(":product_id", $product);
+                $query->bindParam(":quantity", $quantity);
+                $query->bindParam(":balance_before", $bix);
+                $query->bindParam(":balance_after", $current);
+                $query->bindParam(":cost", $zero);
+                $query->bindParam(":type", $debit);
+                $query->bindParam(":user", $user);
+                $query->bindParam(":owner", $user);
+                $query->bindParam(":unit", $unitMeasured);
+                $query->execute();
+
+
                 $db->connect()->commit();
                 echo json_encode([
                     "status" => false,
