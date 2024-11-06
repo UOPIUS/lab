@@ -240,7 +240,8 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
                     $ownerStockUnit = $ownerStock->unit + $quantity;
                     $remainder = $ownerStockUnit % $defaultUnits;
-                    $bix = $ownerStock->balance - floor($ownerStockUnit / $defaultUnits);
+                    $div = $ownerStockUnit / $defaultUnits;
+                    $bix = $ownerStock->balance - floor($div);
 
                     $unitMeasured = $ownerStock->unit - $quantity;
                     $query = $db->connect()->prepare("UPDATE user_stocks SET unit = :unit, rate = :rate, balance = :balance
@@ -258,8 +259,9 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     "status" => false,
                     "message" => "Success",
                     "errors" => $errorBag,
-                    "rate" => $params[0],
-                    "balance" => $params[1],
+                    "rate" => $remainder,
+                    "balance" => $bix,
+                    "balancex" => $div,
                     "defaultUnits" => $defaultUnits
                 ]);
                 exit();
