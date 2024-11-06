@@ -238,7 +238,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     //deduct the equivalent from the user store
                     $previous = $ownerStock->balance;
 
-                    $ownerStockUnit = $ownerStock->unit + $quantity;
+                    $ownerStockUnit = $ownerStock->unit;
                     $remainder = $ownerStockUnit % $defaultUnits;
                     $div = $ownerStockUnit / $defaultUnits;
                     $bix = $ownerStock->balance - floor($div);
@@ -257,7 +257,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                 $db->connect()->commit();
                 echo json_encode([
                     "status" => false,
-                    "message" => "Success",
+                    "message" => "Success $ownerStockUnit",
                     "errors" => $errorBag,
                     "rate" => $remainder,
                     "balance" => $bix,
