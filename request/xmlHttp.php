@@ -237,23 +237,20 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     }
                     //deduct the equivalent from the user store
                     $previous = $ownerStock->balance;
-                    $temp = function ($quantity, $rate) use ($ownerStock) {
-                        $newRate = $ownerStock->rate + $quantity;
-                        $remainder = $newRate % $rate;
-                        $units = round($newRate / $rate, 0);
-                        $balance = $ownerStock->balance - $units;
-                        return [$remainder, $balance];
-                    };
-                    $params = $temp($quantity, $defaultUnits);
+
+                    $ownerStockUnit = $ownerStock->unit + $quantity;
+                    $remainder = $ownerStockUnit % $defaultUnits;
+                    $bix = $ownerStock->balance - floor($ownerStockUnit / $defaultUnits);
+
                     $unitMeasured = $ownerStock->unit - $quantity;
                     $query = $db->connect()->prepare("UPDATE user_stocks SET unit = :unit, rate = :rate, balance = :balance
                     WHERE owner_id = :owner AND product_id = :product");
                     // $query->bindParam(":quantity", $current);
                     $query->bindParam(":product", $product);
                     $query->bindParam(":owner", $user);
-                    $query->bindParam(":balance", $params[1]);
+                    $query->bindParam(":balance", $bix);
                     $query->bindParam(":unit", $unitMeasured);
-                    $query->bindParam(":rate", $params[0]);
+                    $query->bindParam(":rate", $remainder);
                     $query->execute();
                 } //end of foreach
                 $db->connect()->commit();
