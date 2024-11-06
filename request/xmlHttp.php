@@ -238,7 +238,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     //deduct the equivalent from the user store
                     $previous = $ownerStock->balance;
 
-                    $ownerStockUnit = $ownerStock->unit;
+                    $ownerStockUnit = $ownerStock->rate + $quantity;
                     $remainder = $ownerStockUnit % $defaultUnits;
                     $div = $ownerStockUnit / $defaultUnits;
                     $bix = $ownerStock->balance - floor($div);
