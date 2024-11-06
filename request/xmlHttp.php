@@ -260,8 +260,8 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                 VALUES (:product_id, :quantity,:balance_before,:balance_after, :cost, :type, :user, :owner, :unit)");
                 $query->bindParam(":product_id", $product);
                 $query->bindParam(":quantity", $quantity);
-                $query->bindParam(":balance_before", $bix);
-                $query->bindParam(":balance_after", $current);
+                $query->bindParam(":balance_before", $ownerStock->unit);
+                $query->bindParam(":balance_after", $unitMeasured);
                 $query->bindParam(":cost", $zero);
                 $query->bindParam(":type", $debit);
                 $query->bindParam(":user", $user);
