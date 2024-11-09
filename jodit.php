@@ -110,7 +110,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $tests = $class->rawQuery("SELECT tt.id, sb.name FROM tests_taken tt 
+                                                    <?php $tests = $class->rawQuery("SELECT tt.id, sb.name, tt.test_id ttest FROM tests_taken tt 
                                                     JOIN sub_labtest_tbl sb ON tt.test_id = sb.id WHERE tt.tranx_id = '$txref'");
                                                     // $class->fetchAll("tests_taken", " WHERE tranx_id = '$txref'");
                                                     $i = 1;
@@ -126,7 +126,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                                     <button type="button"
                                                                         class="btn btn-primary float-right btn-sm"
                                                                         data-toggle="modal" data-target="#testKitModal"
-                                                                        data-refx="<?= $t->id ?>">
+                                                                        data-refx="<?= $t->id ?>" data-ttest="<?= $t->ttest ?>">
                                                                         <i class="fa fa-plus-circle"></i>&nbsp;Add Test Kit
                                                                     </button>
                                                                 <?php endif; ?>
@@ -394,7 +394,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                 category: e
             };
             var categories = document.getElementById("template");
-            categories.innerHTML = "<option value=''>-Select - </option>"
+            categories.innerHTML = "<option value=''> -Select- </option>"
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'request/ajax_template.php');
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -470,6 +470,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
         $('#testKitModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             var recipient = button.data('refx')
+            var ttest = button.data('ttest')
             var modal = $(this)
             modal.find('.modal-title').text('Add Test Kits to Lab Test')
             modal.find('.modal-body input').val(recipient)
@@ -497,7 +498,8 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                             //iterate and bring out values entered
                             payload.push({
                                 "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_KIT",
-                                "TEST": recipient
+                                "TEST": recipient,
+                                "TEST_TAKEN": ttest
                             });
                             rows.forEach(function (row) {
                                 var cols = row.querySelectorAll("td");

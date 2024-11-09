@@ -201,14 +201,18 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                 echo json_encode(["status" => true, "message" => "Success", "errors" => $errorBag]);
             } elseif ($request[0]["HTTP_REQUEST_ACTION"] == 'HTTP_REQUEST_ASSIGN_KIT') {
                 $test = $request[0]["TEST"];
+                $reference = $request[0]["TEST_TAKEN"]; //sub_labtest_tbl primary key
                 $errorBag = [];
                 if (!$test) {
                     echo json_encode(["status" => false, "message" => "No valid Test in your request", "errors" => $errorBag]);
                     exit();
                 }
+                $taken = $db->connect()->prepare("SELECT * FROM sub_labtest_tbl WHERE test_id = :test_id");
+                $taken->bindParam(":test_id", $reference);
+                $testTaken = $taken->fetch(PDO::FETCH_ASSOC);
 
                 $db->connect()->beginTransaction();
-                //add stock to store
+
                 foreach ($request as $key => $value) {
                     if ($key == 0)
                         continue;
