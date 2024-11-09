@@ -253,32 +253,35 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->bindParam(":unit", $unitMeasured);
                     $query->bindParam(":rate", $remainder);
                     $query->execute();
-                } //end of foreach
-                //log transaction for staff store
-                $query = $db->connect()->prepare("INSERT INTO 
+
+                    //register kit us
+                    $query = $db->connect()->prepare("INSERT INTO kits(test_id, quantity, owner_id) VALUES (:test, :quantity, :owner)");
+                    $query->bindParam(":test", $test);
+                    $query->bindParam(":owner", $user);
+                    $query->bindParam(":quantity", $quantity);
+                    $query->execute();
+
+                    //log transaction for staff store
+                    $query = $db->connect()->prepare("INSERT INTO 
                 inventory_transactions(product_id, quantity,balance_before,balance_after, cost, type,user_id,owner_id, unit)
                 VALUES (:product_id, :quantity,:balance_before,:balance_after, :cost, :type, :user, :owner, :unit)");
-                $query->bindParam(":product_id", $product);
-                $query->bindParam(":quantity", $quantity);
-                $query->bindParam(":balance_before", $ownerStock->unit);
-                $query->bindParam(":balance_after", $unitMeasured);
-                $query->bindParam(":cost", $zero);
-                $query->bindParam(":type", $debit);
-                $query->bindParam(":user", $user);
-                $query->bindParam(":owner", $user);
-                $query->bindParam(":unit", $unitMeasured);
-                $query->execute();
-
+                    $query->bindParam(":product_id", $product);
+                    $query->bindParam(":quantity", $quantity);
+                    $query->bindParam(":balance_before", $ownerStock->unit);
+                    $query->bindParam(":balance_after", $unitMeasured);
+                    $query->bindParam(":cost", $zero);
+                    $query->bindParam(":type", $debit);
+                    $query->bindParam(":user", $user);
+                    $query->bindParam(":owner", $user);
+                    $query->bindParam(":unit", $defaultUnits);
+                    $query->execute();
+                } //end of foreach
 
                 $db->connect()->commit();
                 echo json_encode([
                     "status" => false,
-                    "message" => "Success $ownerStockUnit",
-                    "errors" => $errorBag,
-                    "rate" => $remainder,
-                    "balance" => $bix,
-                    "balancex" => $div,
-                    "defaultUnits" => $defaultUnits
+                    "message" => "Success",
+                    "errors" => $errorBag
                 ]);
                 exit();
             }
