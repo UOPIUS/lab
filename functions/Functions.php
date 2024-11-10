@@ -419,6 +419,13 @@ class Functions extends Database
       return json_decode($_SESSION['site_config']);
     }
   }
+  function validateAlphanumeric($input)
+  {
+    // Regular expression for alphanumeric (letters and numbers only)
+    return preg_match('/^[a-zA-Z0-9]+$/', $input);
+  }
+
+
 
 }
 ?>
