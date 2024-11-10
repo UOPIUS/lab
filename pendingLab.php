@@ -1,21 +1,22 @@
-<?php include_once 'functions/Functions.php'; 
-if(!($_SESSION['role_id'] && $_SESSION['user_id'])) header('location: login.php');
+<?php include_once 'functions/Functions.php';
+if (!($_SESSION['role_id'] && $_SESSION['user_id']))
+    header('location: login.php');
 $class = new Functions();
-$ref = (filter_has_var(INPUT_GET,'ref')) ? htmlentities(filter_input(INPUT_GET,'ref')) : $_SESSION['user_id'];
-$profile = $class->fetch('users_tbl'," WHERE user_id = '$ref'");
+$ref = (filter_has_var(INPUT_GET, 'ref')) ? htmlentities(filter_input(INPUT_GET, 'ref')) : $_SESSION['user_id'];
+$profile = $class->fetch('users_tbl', " WHERE user_id = '$ref'");
 $config = $class->fetch('settings');
 
 $condition = '';
 
-if($_GET['date_to'] && $_GET['date_from']){
-  //date interval
-  $from = (filter_has_var(INPUT_GET, 'date_from')) ? htmlentities(filter_input(INPUT_GET, 'date_from'),ENT_QUOTES) . ' 00:00:00' : '';
-  $to = (filter_has_var(INPUT_GET, 'date_to')) ? htmlentities(filter_input(INPUT_GET, 'date_to'),ENT_QUOTES).' 23:59:59' : '';
-  $condition .= " AND (t.created_at BETWEEN '$from' AND '$to') ";
+if ($_GET['date_to'] && $_GET['date_from']) {
+    //date interval
+    $from = (filter_has_var(INPUT_GET, 'date_from')) ? htmlentities(filter_input(INPUT_GET, 'date_from'), ENT_QUOTES) . ' 00:00:00' : '';
+    $to = (filter_has_var(INPUT_GET, 'date_to')) ? htmlentities(filter_input(INPUT_GET, 'date_to'), ENT_QUOTES) . ' 23:59:59' : '';
+    $condition .= " AND (t.created_at BETWEEN '$from' AND '$to') ";
 }
-if($_GET['trans_type']){
-  $gateway = htmlentities(filter_input(INPUT_GET, 'trans_type'),ENT_QUOTES);
-  $condition .= " AND (t.payment_type = '$gateway') ";
+if ($_GET['trans_type']) {
+    $gateway = htmlentities(filter_input(INPUT_GET, 'trans_type'), ENT_QUOTES);
+    $condition .= " AND (t.payment_type = '$gateway') ";
 }
 
 $sales = $class->rawQuery("
@@ -72,10 +73,11 @@ $sales = $class->rawQuery("
                                             <label for="sel1">Transaction type</label>
                                             <select class="form-control" name='trans_type'>
                                                 <option value=''>All</option>
-                                                <?php $types = $class->fetchAll('payment_types'," WHERE status = 1");
-                        foreach($types as $type){ ?>
-                                                <option value="<?=$type->id ?>"
-                                                    <?php if($_GET['trans_type'] == $type->id) echo 'selected' ?>>
+                                                <?php $types = $class->fetchAll('payment_types', " WHERE status = 1");
+                                                foreach ($types as $type) { ?>
+                                                <option value="<?= $type->id ?>"
+                                                    <?php if ($_GET['trans_type'] == $type->id)
+                                                        echo 'selected' ?>>
                                                     <?= $type->pay_method ?>
                                                 </option>
                                                 <?php } ?>
@@ -107,36 +109,38 @@ $sales = $class->rawQuery("
                                         </thead>
 
                                         <tbody>
-                                            <?php 
-                                            $Zi=1;
-                                            foreach($sales as $x):
-                                            $ref = $class->simple_encrypt($x->client_id,'e');
-                                            $txref = $class->simple_encrypt($x->id,'e');
-                                            ?>
-                                            <tr>
-                                                <td><?=$i++ ?></td>
-                                                <td><?=$x->id ?></td>
-                                                <td><a href="client_profile.php?refx=<?=$ref ?>"
-                                                        class="btn btn-link"><?=$x->client ?></a></td>
-                                                <td><?=$x->fname.' '.$x->lname. ''.$x->oname ?></td>
-                                                <td>
-                                                    <?php $tests = $class->fetchAll("tests_taken"," WHERE tranx_id = '{$x->id}'");
-                                                    $i = 1;
-                                                    <?php if($t->test_result) echo "<i class='fa fa-check-circle text-success'></i>";
-                                                        else echo "<i class='fa fa-times text-danger'></i>"; ?>
-                                                    foreach($tests as $t): ?>
-                                                    <strong
-                                                        class="text-danger"><?=$i++.'.' .$class->fetchColumn('sub_labtest_tbl','name','id',$t->test_id) ?>
-                                                    </strong><br>
+                                            <?php
+                                            $Zi = 1;
+                                            foreach ($sales as $x):
+                                                $ref = $class->simple_encrypt($x->client_id, 'e');
+                                                $txref = $class->simple_encrypt($x->id, 'e');
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i++ ?></td>
+                                                    <td><?= $x->id ?></td>
+                                                    <td><a href="client_profile.php?refx=<?= $ref ?>"
+                                                            class="btn btn-link"><?= $x->client ?></a></td>
+                                                    <td><?= $x->fname . ' ' . $x->lname . '' . $x->oname ?></td>
+                                                    <td>
+                                                        <?php $tests = $class->fetchAll("tests_taken", " WHERE tranx_id = '{$x->id}'");
+                                                        $i = 1;
+                                                        if ($t->test_result)
+                                                            echo "<i class='fa fa-check-circle text-success'></i>";
+                                                        else
+                                                            echo "<i class='fa fa-times text-danger'></i>";
+                                                        foreach ($tests as $t): ?>
+                                                            <strong
+                                                                class="text-danger"><?= $i++ . '.' . $class->fetchColumn('sub_labtest_tbl', 'name', 'id', $t->test_id) ?>
+                                                            </strong><br>
 
-                                                    <?php endforeach; ?>
-                                                </td>
-                                                <td><?=$x->created_at ?></td>
-                                                <td>
-                                                    <a href="report_test.php?refx=<?=$txref?>"
-                                                        class="btn-info btn-sm btn">Report Test</a>
-                                                </td>
-                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </td>
+                                                    <td><?= $x->created_at ?></td>
+                                                    <td>
+                                                        <a href="report_test.php?refx=<?= $txref ?>"
+                                                            class="btn-info btn-sm btn">Report Test</a>
+                                                    </td>
+                                                </tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
