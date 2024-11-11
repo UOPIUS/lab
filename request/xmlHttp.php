@@ -283,8 +283,8 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
                 $db->connect()->commit();
                 echo json_encode([
-                    "status" => false,
-                    "message" => "Success",
+                    "status" => true,
+                    "message" => "Kit are Assigned Successfully",
                     "errors" => $errorBag
                 ]);
                 exit();
