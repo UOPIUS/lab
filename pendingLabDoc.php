@@ -4,12 +4,11 @@ if (!($_SESSION['role_id'] && $_SESSION['user_id']))
 $class = new Functions();
 $condition = '';
 
-//if($_GET['date_to'] && $_GET['date_from']){
-//date interval
+
 $from = (filter_has_var(INPUT_GET, 'date_from')) ? htmlentities(filter_input(INPUT_GET, 'date_from'), ENT_QUOTES) . ' 00:00:00' : date("Y-m-d") . " 00:00:59";
 $to = (filter_has_var(INPUT_GET, 'date_to')) ? htmlentities(filter_input(INPUT_GET, 'date_to'), ENT_QUOTES) . ' 23:59:59' : date("Y-m-d") . " 23:59:59";
 $condition .= " AND (t.created_at BETWEEN '$from' AND '$to') ";
-//}
+
 
 $sales = $class->rawQuery("SELECT t.id,t.client_id,DATE_FORMAT(t.created_at, '%d/%m/%Y') AS created_at,
 CONCAT(c.fname,' ',c.lname,' ',c.oname) AS name, c.phone,c.dob
@@ -133,12 +132,12 @@ $config = $class->fetchSettings();
     <script src="js/tejiri.js"></script>
     <script>
     /*        window.onload=()=>{
-                        const buttonList = document.querySelectorAll(".clienta");
-                        const buttonLen = buttonList.length;
-                        for(var i=0;i<buttonLen;i++){
-                            clientToolTip(buttonList[i]);
-                        }
-                    }*/
+                            const buttonList = document.querySelectorAll(".clienta");
+                            const buttonLen = buttonList.length;
+                            for(var i=0;i<buttonLen;i++){
+                                clientToolTip(buttonList[i]);
+                            }
+                        }*/
     function clientToolTip(param) {
         const t = new URLSearchParams({
             href: param.getAttribute("data-href")
