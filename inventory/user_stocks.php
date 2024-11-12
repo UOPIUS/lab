@@ -6,6 +6,7 @@ if ($class->checkSession($_SESSION['user_id']) === false)
 $config = $class->fetchSettings();
 
 $condition = "";
+
 if($_SESSION['role_id'] == 108) $condition .= " st.owner_id = '{$_SESSION['user_id']}' ";
 
 $product = "";
@@ -19,7 +20,7 @@ $raw = "SELECT p.name productName, st.unit, st.balance, st.created_at, st.update
 FROM user_stocks st JOIN products p ON st.product_id = p.id 
 LEFT JOIN users_tbl u ON st.owner_id = u.user_id 
 JOIN inventory_units un ON p.inventory_unit_id = un.id
-WHERE 1 = 1 $condition'
+WHERE 1 = 1 $condition
 ORDER BY st.created_at DESC";
 
 $data = $class->rawQuery($raw);
