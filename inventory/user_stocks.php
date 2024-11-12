@@ -7,7 +7,7 @@ $config = $class->fetchSettings();
 
 $condition = "";
 
-if($_SESSION['role_id'] == 108) $condition .= " st.owner_id = '{$_SESSION['user_id']}' ";
+// if($_SESSION['role_id'] == 108) $condition .= " st.owner_id = '{$_SESSION['user_id']}' ";
 
 $product = "";
 if(filter_has_var(INPUT_GET, 'product_id') && preg_match('/^[0-9]+$/', filter_input(INPUT_GET,'product_id'))){
@@ -20,8 +20,7 @@ $raw = "SELECT p.name productName, st.unit, st.balance, st.created_at, st.update
 FROM user_stocks st JOIN products p ON st.product_id = p.id 
 LEFT JOIN users_tbl u ON st.owner_id = u.user_id 
 JOIN inventory_units un ON p.inventory_unit_id = un.id
-WHERE 1 = 1 $condition
-ORDER BY st.created_at DESC";
+WHERE 1 = 1 $condition ORDER BY st.created_at DESC";
 
 $data = $class->rawQuery($raw);
 
