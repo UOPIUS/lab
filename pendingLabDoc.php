@@ -15,7 +15,7 @@ $sales = $class->rawQuery("SELECT t.id,t.client_id,DATE_FORMAT(t.created_at, '%d
 CONCAT(c.fname,' ',c.lname,' ',c.oname) AS name, c.phone,c.dob
 FROM transactions t JOIN clients_tbl c ON t.client_id = c.ref
 WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
-
+$config = $class->fetchSettings();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,24 +93,24 @@ WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
                                                 $ref = $class->simple_encrypt($x->client_id, 'e');
                                                 $txref = $class->simple_encrypt($x->id, 'e');
                                                 ?>
-                                                <tr>
-                                                    <td><?= $i++ ?></td>
-                                                    <td><a href="client_profile.php?refx=<?= $ref ?>"
-                                                            class="btn btn-link"><?= $x->client_id ?></a></td>
-                                                    <td>
-                                                        <!--<span data-href="<?= $x->client_id ?>" class='clienta' onclick="clientToolTip(this)">preview</span>-->
-                                                        <?= $x->name ?>
-                                                    </td>
-                                                    <td><?= $x->dob ?></td>
-                                                    <!--<td>-->
+                                            <tr>
+                                                <td><?= $i++ ?></td>
+                                                <td><a href="client_profile.php?refx=<?= $ref ?>"
+                                                        class="btn btn-link"><?= $x->client_id ?></a></td>
+                                                <td>
+                                                    <!--<span data-href="<?= $x->client_id ?>" class='clienta' onclick="clientToolTip(this)">preview</span>-->
+                                                    <?= $x->name ?>
+                                                </td>
+                                                <td><?= $x->dob ?></td>
+                                                <!--<td>-->
 
-                                                    <!--</td>-->
-                                                    <td><?= $x->created_at ?></td>
-                                                    <td>
-                                                        <a href="jodit.php?refx=<?= $txref ?>"
-                                                            class="btn-info btn-sm btn">Report Test</a>
-                                                    </td>
-                                                </tr>
+                                                <!--</td>-->
+                                                <td><?= $x->created_at ?></td>
+                                                <td>
+                                                    <a href="jodit.php?refx=<?= $txref ?>"
+                                                        class="btn-info btn-sm btn">Report Test</a>
+                                                </td>
+                                            </tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
@@ -132,36 +132,36 @@ WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
     <script src="js/scripts.js"></script>
     <script src="js/tejiri.js"></script>
     <script>
-        /*        window.onload=()=>{
+    /*        window.onload=()=>{
                         const buttonList = document.querySelectorAll(".clienta");
                         const buttonLen = buttonList.length;
                         for(var i=0;i<buttonLen;i++){
                             clientToolTip(buttonList[i]);
                         }
                     }*/
-        function clientToolTip(param) {
-            const t = new URLSearchParams({
-                href: param.getAttribute("data-href")
-            }).toString();
-            let a = new XMLHttpRequest();
-            a.open("POST", "functions/fetch_client.php"),
-                a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),
-                //a.setRequestHeader("X-CSRF-TOKEN", document.getElementsByTagName("meta")["csrf-token"].getAttribute("content"));
-                a.send(t);
-            a.onload = function () {
-                if (a.status != 200) { // analyze HTTP status of the response
-                    console.log(`Error ${o.status}: ${o.statusText}`);
-                } else { // show the result
-                    const json = JSON.parse(a.response);
-                    if (json.status) {
-                        param.innerHTML = json.name + "(" + json.age + ")";
-                    } else {
-                        console.log(json.message)
-                    }
+    function clientToolTip(param) {
+        const t = new URLSearchParams({
+            href: param.getAttribute("data-href")
+        }).toString();
+        let a = new XMLHttpRequest();
+        a.open("POST", "functions/fetch_client.php"),
+            a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),
+            //a.setRequestHeader("X-CSRF-TOKEN", document.getElementsByTagName("meta")["csrf-token"].getAttribute("content"));
+            a.send(t);
+        a.onload = function() {
+            if (a.status != 200) { // analyze HTTP status of the response
+                console.log(`Error ${o.status}: ${o.statusText}`);
+            } else { // show the result
+                const json = JSON.parse(a.response);
+                if (json.status) {
+                    param.innerHTML = json.name + "(" + json.age + ")";
+                } else {
+                    console.log(json.message)
                 }
+            }
 
-            };
-        }
+        };
+    }
     </script>
 </body>
 
