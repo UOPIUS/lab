@@ -133,14 +133,16 @@ WHERE t.status = 1 $condition ORDER BY t.created_at DESC");
     <script src="js/tejiri.js"></script>
     <script>
         /*        window.onload=()=>{
-                    const buttonList = document.querySelectorAll(".clienta");
-                    const buttonLen = buttonList.length;
-                    for(var i=0;i<buttonLen;i++){
-                        clientToolTip(buttonList[i]);
-                    }
-                }*/
+                        const buttonList = document.querySelectorAll(".clienta");
+                        const buttonLen = buttonList.length;
+                        for(var i=0;i<buttonLen;i++){
+                            clientToolTip(buttonList[i]);
+                        }
+                    }*/
         function clientToolTip(param) {
-            const t = new URLSearchParams({ href: param.getAttribute("data-href") }).toString();
+            const t = new URLSearchParams({
+                href: param.getAttribute("data-href")
+            }).toString();
             let a = new XMLHttpRequest();
             a.open("POST", "functions/fetch_client.php"),
                 a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),

@@ -50,7 +50,7 @@ $products = $class->rawQuery("SELECT id, name FROM products WHERE status = 1 ORD
                 <div class="container-fluid">
                     <div class="card mb-4 mt-4">
                         <div class="card-header">
-                            <h4 class="mt-4 d-inline">ASSIGNED INVENTORY LIST</h4>
+                            <h4 class="mt-4 d-inline">ASSIGNED INVENTORY HISTORY</h4>
 
                             <form class="mt-4" action="<?= htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
                                 <div class="form-row">

@@ -57,23 +57,23 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                 </li>
                                 <li class="nav-item <?php if ($isLabTechnician)
                                     echo 'd-none' ?>">
-                                        <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"
-                                            aria-selected="false">
-                                            <span class="hidden-sm-up">
-                                                <i class="fa fa-flask"></i>
-                                            </span>
-                                            <span class="hidden-xs-down">Check Reports</span></a>
-                                    </li>
-                                </ul>
-                                <!-- Tab panes -->
-                                <div class="tab-content pl-2">
-                                    <div class="tab-pane active" id="home2" role="tabpanel">
-                                        <div class="p-4">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12">
-                                                    <label for="full_name">Full Name</label>
-                                                    <input type="text" class="form-control" disabled
-                                                        value="<?= $customer->fname . " " . $customer->lname . " " . $customer->oname ?>">
+                                    <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"
+                                        aria-selected="false">
+                                        <span class="hidden-sm-up">
+                                            <i class="fa fa-flask"></i>
+                                        </span>
+                                        <span class="hidden-xs-down">Check Reports</span></a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content pl-2">
+                                <div class="tab-pane active" id="home2" role="tabpanel">
+                                    <div class="p-4">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="full_name">Full Name</label>
+                                                <input type="text" class="form-control" disabled
+                                                    value="<?= $customer->fname . " " . $customer->lname . " " . $customer->oname ?>">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="oname">Gender</label>
@@ -115,23 +115,23 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                     // $class->fetchAll("tests_taken", " WHERE tranx_id = '$txref'");
                                                     $i = 1;
                                                     foreach ($tests as $t): ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?= $i++ ?>
-                                                            </td>
-                                                            <td><?= $t->name ?></td>
-                                                            <td>NA</td>
-                                                            <td>
-                                                                <?php if ($isLabTechnician): ?>
-                                                                    <button type="button"
-                                                                        class="btn btn-primary float-right btn-sm"
-                                                                        data-toggle="modal" data-target="#testKitModal"
-                                                                        data-refx="<?= $t->id ?>" data-ttest="<?= $t->ttest ?>">
-                                                                        <i class="fa fa-plus-circle"></i>&nbsp;Add Test Kit
-                                                                    </button>
-                                                                <?php endif; ?>
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $i++ ?>
+                                                        </td>
+                                                        <td><?= $t->name ?></td>
+                                                        <td>NA</td>
+                                                        <td>
+                                                            <?php if ($isLabTechnician): ?>
+                                                            <button type="button"
+                                                                class="btn btn-primary float-right btn-sm"
+                                                                data-toggle="modal" data-target="#testKitModal"
+                                                                data-refx="<?= $t->id ?>" data-ttest="<?= $t->ttest ?>">
+                                                                <i class="fa fa-plus-circle"></i>&nbsp;Add Test Kit
+                                                            </button>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>
@@ -163,44 +163,44 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                         $testInfo = $class->fetch('sub_labtest_tbl', " WHERE id = '$t->test_id'");
                                                         $testCategory = $testInfo->labtest_id;
                                                         ?>
-                                                        <tr>
-                                                            <td><?php $pformTestName = $testInfo->name;
+                                                    <tr>
+                                                        <td><?php $pformTestName = $testInfo->name;
                                                             echo $pformTestName; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php if ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105) { ?>
-                                                                    <button type="button" class="btn btn-primary btn-sm"
-                                                                        data-toggle="modal"
-                                                                        data-pformtestname="<?= $pformTestName ?>"
-                                                                        data-pformtestkey="<?= $t->id ?>"
-                                                                        data-pformtestdetail="<?= $t->test_result ?>"
-                                                                        data-categoryid="<?= $testCategory ?>"
-                                                                        data-target="#makeReportModal">Edit Result<i
-                                                                            class="fa fa-edit ml-1"></i>
-                                                                    </button>
-                                                                <?php } else
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105) { ?>
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                data-toggle="modal"
+                                                                data-pformtestname="<?= $pformTestName ?>"
+                                                                data-pformtestkey="<?= $t->id ?>"
+                                                                data-pformtestdetail="<?= $t->test_result ?>"
+                                                                data-categoryid="<?= $testCategory ?>"
+                                                                data-target="#makeReportModal">Edit Result<i
+                                                                    class="fa fa-edit ml-1"></i>
+                                                            </button>
+                                                            <?php } else
                                                                     "<button class='btn btn-default btn-sm'>NA</button>"; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php if ($t->test_result && ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105)) { ?>
-                                                                    <a href="#" data-xf="<?= $t->tranx_id ?>"
-                                                                        data-zf="<?= $t->id ?>"
-                                                                        class="btn btn-warning btn-sm aLink">Click
-                                                                        for
-                                                                        Test Print<i class="fa fa-play-circle ml-1"></i>
-                                                                    </a>
-                                                                <?php } else {
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($t->test_result && ($_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 105)) { ?>
+                                                            <a href="#" data-xf="<?= $t->tranx_id ?>"
+                                                                data-zf="<?= $t->id ?>"
+                                                                class="btn btn-warning btn-sm aLink">Click
+                                                                for
+                                                                Test Print<i class="fa fa-play-circle ml-1"></i>
+                                                            </a>
+                                                            <?php } else {
                                                                     echo "NA";
                                                                 } ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php if ($t->test_result)
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($t->test_result)
                                                                     echo "<i class='fa fa-check-circle text-success'></i>";
                                                                 else
                                                                     echo "<i class='fa fa-times text-danger'></i>"; ?>
-                                                            </td>
+                                                        </td>
 
-                                                        </tr>
+                                                    </tr>
 
                                                     <?php endforeach; ?>
                                                 </tbody>
@@ -336,7 +336,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                     <option value="">Choose...</option>
                                     <?php $specimens = $class->fetchAll('specimens');
                                     foreach ($specimens as $sp): ?>
-                                        <option value="<?= $sp->id ?>"><?= $sp->name ?></option>
+                                    <option value="<?= $sp->id ?>"><?= $sp->name ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -346,8 +346,8 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                     <option value=''>Choose...</option>
                                     <?php $templates = $class->fetchAll('test_templates');
                                     foreach ($templates as $t): ?>
-                                        <option value="<?= $t->body ?>"><?= $t->template_name ?? 'Template ' . time() ?>
-                                        </option>
+                                    <option value="<?= $t->body ?>"><?= $t->template_name ?? 'Template ' . time() ?>
+                                    </option>
                                     <?php endforeach; ?>
                                 </select>
 
@@ -369,7 +369,6 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
             </div>
         </div>
     </div>
-    <!-- Modal Ends -->
     <!-- show Test Modal ends -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -381,180 +380,180 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
     <script src="assets/sweetalert/sweetalert.min.js"></script>
 
     <script>
-        const editor = Jodit.make('#templateBody');
-        window.onload = () => {
-            document.getElementById('template').addEventListener('change', (t) => {
-                //load template into editor
-                editor.value = t.target.value
-            });
+    const editor = Jodit.make('#templateBody');
+    window.onload = () => {
+        document.getElementById('template').addEventListener('change', (t) => {
+            //load template into editor
+            editor.value = t.target.value
+        });
+    };
+
+    function ajaxLoadCat(e) {
+        var data = {
+            category: e
         };
-
-        function ajaxLoadCat(e) {
-            var data = {
-                category: e
-            };
-            var categories = document.getElementById("template");
-            categories.innerHTML = "<option value=''> -Select- </option>"
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'request/ajax_template.php');
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.send(new URLSearchParams(data).toString());
-            xhr.onload = function () {
-                if (xhr.status != 200) {
-                    console.log(xhr.statusText);
-                } else {
-                    var jsonData = JSON.parse(xhr.response);
-                    var jsonLength = jsonData.data.length;
-                    for (var i = 0; i < jsonLength; i++) {
-                        var counter = jsonData.data[i];
-                        var newSelect = document.createElement("option");
-                        newSelect.value = counter.body;
-                        newSelect.text = counter.name;
-                        categories.appendChild(newSelect);
-                    }
+        var categories = document.getElementById("template");
+        categories.innerHTML = "<option value=''> -Select- </option>"
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'request/ajax_template.php');
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(new URLSearchParams(data).toString());
+        xhr.onload = function() {
+            if (xhr.status != 200) {
+                console.log(xhr.statusText);
+            } else {
+                var jsonData = JSON.parse(xhr.response);
+                var jsonLength = jsonData.data.length;
+                for (var i = 0; i < jsonLength; i++) {
+                    var counter = jsonData.data[i];
+                    var newSelect = document.createElement("option");
+                    newSelect.value = counter.body;
+                    newSelect.text = counter.name;
+                    categories.appendChild(newSelect);
                 }
-            };
-        }
-        $("#makeReportModal").on("show.bs.modal", function (event) {
-            var button = $(event.relatedTarget);
-            var modal = $(this);
-            modal.find(".modal-title").text(button.data('pformtestname'));
-            modal.find(".modal-body input#each-test").val(button.data('pformtestkey'));
+            }
+        };
+    }
+    $("#makeReportModal").on("show.bs.modal", function(event) {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+        modal.find(".modal-title").text(button.data('pformtestname'));
+        modal.find(".modal-body input#each-test").val(button.data('pformtestkey'));
 
-            editor.value = button.data('pformtestdetail');
+        editor.value = button.data('pformtestdetail');
 
-            //populate the chosen category
-            ajaxLoadCat(button.data('categoryid'));
+        //populate the chosen category
+        ajaxLoadCat(button.data('categoryid'));
 
-            $("#analyseTestForm").submit(function (e) {
-                let url = "request/testform_report.php",
-                    $response = $("#analyse-response");
-                // Send the data using post
-                var posting = $.post(url, $(this).serialize());
-                $response.html("<p class='bg-warning p-2 text-white'>Please Wait . . . </p>").fadeIn();
-                posting.done(function (data) {
-                    let result = JSON.parse(data);
-                    if (200 == result.status) {
-                        $response.html(
-                            '<p class="bg-success text-white p-2">' + result.message + "</p>"
-                        ).fadeOut(5000, function () {
-                            window.location.reload()
-                            $('#makeReportModal').modal('hide');
-                        });
-                        return false;
-                    }
+        $("#analyseTestForm").submit(function(e) {
+            let url = "request/testform_report.php",
+                $response = $("#analyse-response");
+            // Send the data using post
+            var posting = $.post(url, $(this).serialize());
+            $response.html("<p class='bg-warning p-2 text-white'>Please Wait . . . </p>").fadeIn();
+            posting.done(function(data) {
+                let result = JSON.parse(data);
+                if (200 == result.status) {
                     $response.html(
-                        '<p class="bg-danger text-white p-2">' + result.message + "</p>"
-                    );
-                });
-                e.preventDefault();
+                        '<p class="bg-success text-white p-2">' + result.message + "</p>"
+                    ).fadeOut(5000, function() {
+                        window.location.reload()
+                        $('#makeReportModal').modal('hide');
+                    });
+                    return false;
+                }
+                $response.html(
+                    '<p class="bg-danger text-white p-2">' + result.message + "</p>"
+                );
             });
-        });
-        $(".aLink").click(function (e) {
             e.preventDefault();
-            var t = e.target
-            var url = t.href,
-                p = t.getAttribute('data-xf'),
-                q = t.getAttribute('data-zf');
-            $.get("request/vtyn2xASj5fsRteLoqjII7C.php?idx=" + p + "&idReference=" + q, function (data) {
-                var jsonData = JSON.parse(data);
-                if (jsonData.status)
-                    window.location.href = "xtiny.php?idx=" + jsonData.id;
-                else
-                    swal("CMA Debtor Detected", jsonData.message, 'error');
-
-            });
-            //
         });
+    });
+    $(".aLink").click(function(e) {
+        e.preventDefault();
+        var t = e.target
+        var url = t.href,
+            p = t.getAttribute('data-xf'),
+            q = t.getAttribute('data-zf');
+        $.get("request/vtyn2xASj5fsRteLoqjII7C.php?idx=" + p + "&idReference=" + q, function(data) {
+            var jsonData = JSON.parse(data);
+            if (jsonData.status)
+                window.location.href = "xtiny.php?idx=" + jsonData.id;
+            else
+                swal("CMA Debtor Detected", jsonData.message, 'error');
 
-        $('#testKitModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var recipient = button.data('refx')
-            var ttest = button.data('ttest')
-            var modal = $(this)
-            modal.find('.modal-title').text('Add Test Kits to Lab Test')
-            modal.find('.modal-body input').val(recipient)
+        });
+        //
+    });
 
-            document.getElementById("stockForm").addEventListener('submit', (finalEvent) => {
-                let formElem = finalEvent.currentTarget;
-                finalEvent.preventDefault();
-                var payload = [];
-                swal({
+    $('#testKitModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var recipient = button.data('refx')
+        var ttest = button.data('ttest')
+        var modal = $(this)
+        modal.find('.modal-title').text('Add Test Kits to Lab Test')
+        modal.find('.modal-body input').val(recipient)
+
+        document.getElementById("stockForm").addEventListener('submit', (finalEvent) => {
+            let formElem = finalEvent.currentTarget;
+            finalEvent.preventDefault();
+            var payload = [];
+            swal({
                     title: "Are you sure?",
                     text: "You are about to add stock to your user. This operation cannot be reversed or edited. Please be sure you know what you are doing before you continue.",
                     icon: "warning",
                     buttons: ["No, Cancel", "Yes Continue"],
                     dangerMode: true,
                 })
-                    .then((proceed) => {
-                        if (proceed) {
-                            const btn = document.getElementById("finalSubmitStockRequest");
-                            btn.disabled = true;
-                            btn.innerHTML = `<progress></progress>`;
-                            let tableBodyRef = document.getElementById('stockTable')
-                                .getElementsByTagName(
-                                    'tbody')[0];
-                            const rows = tableBodyRef.querySelectorAll("tr");
-                            //iterate and bring out values entered
+                .then((proceed) => {
+                    if (proceed) {
+                        const btn = document.getElementById("finalSubmitStockRequest");
+                        btn.disabled = true;
+                        btn.innerHTML = `<progress></progress>`;
+                        let tableBodyRef = document.getElementById('stockTable')
+                            .getElementsByTagName(
+                                'tbody')[0];
+                        const rows = tableBodyRef.querySelectorAll("tr");
+                        //iterate and bring out values entered
+                        payload.push({
+                            "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_KIT",
+                            "TEST": recipient,
+                            "TEST_TAKEN": ttest
+                        });
+                        rows.forEach(function(row) {
+                            var cols = row.querySelectorAll("td");
                             payload.push({
-                                "HTTP_REQUEST_ACTION": "HTTP_REQUEST_ASSIGN_KIT",
-                                "TEST": recipient,
-                                "TEST_TAKEN": ttest
-                            });
-                            rows.forEach(function (row) {
-                                var cols = row.querySelectorAll("td");
-                                payload.push({
-                                    "category": cols[0].getElementsByTagName("select")[
+                                "category": cols[0].getElementsByTagName("select")[
                                         0]
-                                        .value,
-                                    "product": cols[1].getElementsByTagName("select")[0]
-                                        .value,
+                                    .value,
+                                "product": cols[1].getElementsByTagName("select")[0]
+                                    .value,
 
-                                    "quantity": cols[2].getElementsByTagName("input")[0]
-                                        .value
-                                });
+                                "quantity": cols[2].getElementsByTagName("input")[0]
+                                    .value
                             });
-                            const data = JSON.stringify(payload);
-                            console.log(data);
-                            let xhr = new XMLHttpRequest();
-                            xhr.open('POST', '../request/xmlHttp.php');
-                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                            xhr.send(data);
-                            xhr.onload = function () {
-                                if (xhr.status != 200) {
-                                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                        });
+                        const data = JSON.stringify(payload);
+                        console.log(data);
+                        let xhr = new XMLHttpRequest();
+                        xhr.open('POST', '../request/xmlHttp.php');
+                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhr.send(data);
+                        xhr.onload = function() {
+                            if (xhr.status != 200) {
+                                console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                            } else {
+                                btn.disabled = false;
+                                btn.innerHTML = "Submit";
+                                const detail = JSON.parse(xhr.responseText);
+                                if (detail.status) {
+                                    formElem.reset();
+                                    swal({
+                                        title: "Alert",
+                                        text: detail.message,
+                                        icon: 'success',
+                                        timer: 2000
+                                    });
+                                    window.location.href = "/inventory/assign_inventory.php";
                                 } else {
-                                    btn.disabled = false;
-                                    btn.innerHTML = "Submit";
-                                    const detail = JSON.parse(xhr.responseText);
-                                    if (detail.status) {
-                                        formElem.reset();
-                                        swal({
-                                            title: "Alert",
-                                            text: detail.message,
-                                            icon: 'success',
-                                            timer: 2000
-                                        });
-                                        window.location.href = "/inventory/assign_inventory.php";
-                                    } else {
-                                        var wrapper = document.createElement('div');
-                                        wrapper.innerHTML = detail.errors.map(displayError);
-                                        swal({
-                                            title: 'Error',
-                                            text: "",
-                                            content: wrapper,
-                                            icon: "error",
-                                        });
-                                    }
+                                    var wrapper = document.createElement('div');
+                                    wrapper.innerHTML = detail.errors.map(displayError);
+                                    swal({
+                                        title: 'Error',
+                                        text: "",
+                                        content: wrapper,
+                                        icon: "error",
+                                    });
                                 }
-                            };
-                        } else {
-                            console.log("Operation Cancelled")
-                        }
-                    });
-            })
-
+                            }
+                        };
+                    } else {
+                        console.log("Operation Cancelled")
+                    }
+                });
         })
+
+    })
     </script>
 </body>
 

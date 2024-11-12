@@ -200,11 +200,14 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                 $db->connect()->commit();
                 echo json_encode(["status" => true, "message" => "Success", "errors" => $errorBag]);
             } elseif ($request[0]["HTTP_REQUEST_ACTION"] == 'HTTP_REQUEST_ASSIGN_KIT') {
+                $responseFlag = true; //error free by default
+
                 $test = $request[0]["TEST"];
                 $reference = $request[0]["TEST_TAKEN"]; //sub_labtest_tbl primary key
                 $errorBag = [];
                 if (!$test) {
-                    echo json_encode(["status" => false, "message" => "No valid Test in your request", "errors" => $errorBag]);
+                    $responseFlag = false;
+                    echo json_encode(["status" => $responseFlag, "message" => "No valid Test in your request", "errors" => $errorBag]);
                     exit();
                 }
                 $taken = $db->connect()->prepare("SELECT * FROM sub_labtest_tbl WHERE test_id = :test_id");
@@ -232,10 +235,12 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->execute();
                     $ownerStock = $query->fetch(PDO::FETCH_OBJ);
                     if (!$ownerStock) {
+                        $responseFlag = false;
                         $errorBag[] = "No stock is currently assigned to you for $productName";
                         continue;
                     }
                     if ($ownerStock->unit < $quantity) {
+                        $responseFlag = false;
                         $errorBag[] = "Insufficient Stock Balance for $productName, Current Stock Balance: {$ownerStock->unit}, Quantity to assign: $quantity";
                         continue;
                     }
@@ -283,8 +288,8 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
                 $db->connect()->commit();
                 echo json_encode([
-                    "status" => true,
-                    "message" => "Kit are Assigned Successfully",
+                    "status" => $responseFlag,
+                    "message" => "Operation completed successfully",
                     "errors" => $errorBag
                 ]);
                 exit();
