@@ -7,7 +7,7 @@ $config = $class->fetchSettings();
 
 $condition = "";
 
-if($_SESSION['role_id'] == 108) $condition .= " st.owner_id = '{$_SESSION['user_id']}' ";
+if($_SESSION['role_id'] == 108) $condition .= " AND st.owner_id = '{$_SESSION['user_id']}' ";
 
 $product = "";
 if(filter_has_var(INPUT_GET, 'product_id') && preg_match('/^[0-9]+$/', filter_input(INPUT_GET,'product_id'))){
