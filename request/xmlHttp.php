@@ -221,6 +221,10 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                         continue;
                     $product = $value["product"];
                     $quantity = $value["quantity"];
+                    if (!$product && !$quantity) {
+                        $errorBag[] = "Product or quantity not specified for some inputs";
+                        continue;
+                    }
 
                     $pro = $db->connect()->query("SELECT p.name,i.quantity AS units 
                     FROM products p JOIN inventory_units i ON p.inventory_unit_id = i.id 
