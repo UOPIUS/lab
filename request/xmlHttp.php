@@ -87,6 +87,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
                 echo json_encode(["status" => true, "message" => "Success"]);
             } elseif ($request[0]["HTTP_REQUEST_ACTION"] == 'HTTP_REQUEST_ASSIGN_STOCK') {
+                $responseFlag = true; //error free by default
                 $staff = $request[0]["STAFF"];
                 $errorBag = [];
                 if (!$staff) {
@@ -198,7 +199,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
 
                 } //end of foreach
                 $db->connect()->commit();
-                echo json_encode(["status" => true, "message" => "Success", "errors" => $errorBag]);
+                echo json_encode(["status" => $responseFlag, "message" => "Success", "errors" => $errorBag]);
             } elseif ($request[0]["HTTP_REQUEST_ACTION"] == 'HTTP_REQUEST_ASSIGN_KIT') {
                 $responseFlag = true; //error free by default
 
