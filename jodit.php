@@ -110,7 +110,7 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $tests = $class->rawQuery("SELECT tt.id, sb.name, tt.test_id ttest FROM tests_taken tt 
+                                                    <?php $tests = $class->rawQuery("SELECT tt.id,tt.kits_used, sb.name, tt.test_id ttest FROM tests_taken tt 
                                                     JOIN sub_labtest_tbl sb ON tt.test_id = sb.id WHERE tt.tranx_id = '$txref'");
                                                     // $class->fetchAll("tests_taken", " WHERE tranx_id = '$txref'");
                                                     $i = 1;
@@ -120,9 +120,9 @@ $isLabTechnician = $_SESSION['role_id'] == 108;
                                                                 <?= $i++ ?>
                                                             </td>
                                                             <td><?= $t->name ?></td>
-                                                            <td>NA</td>
+                                                            <td><?= $t->kits_used ?></td>
                                                             <td>
-                                                                <?php if ($isLabTechnician): ?>
+                                                                <?php if ($isLabTechnician && !$t->kits_used): ?>
                                                                     <button type="button"
                                                                         class="btn btn-primary float-right btn-sm"
                                                                         data-toggle="modal" data-target="#testKitModal"

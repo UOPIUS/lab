@@ -301,7 +301,7 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                 } //end of foreach
 
                 //update the Test Taken Table to set the kits
-                $db->connect()->query("UPDATE tests_taken SET kit_used = '$kits' WHERE id = '$test'");
+                $db->connect()->query("UPDATE tests_taken SET kits_used = '$kits' WHERE id = '$test'");
 
                 $db->connect()->commit();
                 echo json_encode([
