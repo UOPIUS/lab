@@ -211,9 +211,9 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     echo json_encode(["status" => $responseFlag, "message" => "No valid Test in your request", "errors" => $errorBag]);
                     exit();
                 }
-                $taken = $db->connect()->prepare("SELECT * FROM sub_labtest_tbl WHERE test_id = :test_id");
-                $taken->bindParam(":test_id", $reference);
-                $testTaken = $taken->fetch(PDO::FETCH_ASSOC);
+                // $taken = $db->connect()->prepare("SELECT * FROM sub_labtest_tbl WHERE test_id = :test_id");
+                // $taken->bindParam(":test_id", $reference);
+                // $testTaken = $taken->fetch(PDO::FETCH_ASSOC);
 
                 $db->connect()->beginTransaction();
 
@@ -271,9 +271,9 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     //register kit us
                     $query = $db->connect()->prepare("INSERT INTO kits(test_taken_id,test_id, quantity, owner_id,product_id) 
                     VALUES (:testTaken,:test, :quantity, :owner, :product)");
-                    $query->bindParam(":test", $test);
+                    $query->bindParam(":test", $reference);
                     $query->bindParam(":product", $product);
-                    $query->bindParam(":testTaken", $reference);
+                    $query->bindParam(":testTaken", $test);
                     $query->bindParam(":owner", $user);
                     $query->bindParam(":quantity", $quantity);
                     $query->execute();
