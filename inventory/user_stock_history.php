@@ -8,6 +8,18 @@ $config = $class->fetchSettings();
 $condition = "";
 if($_SESSION['role_id'] == 108) $condition .= " AND k.owner_id = '{$_SESSION['user_id']}' ";
 
+$from = filter_input(INPUT_GET, 'date_from');
+$to = filter_input(INPUT_GET, 'date_to');
+
+//default: Display payment for the last 30 days
+$default = " AND (k.created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)) ";
+if ($from && $to) {
+  $from .=  ' 00:00:00';
+  $to .= ' 23:59:59';
+  $default = " AND (k.created_at BETWEEN '$from' AND '$to') ";
+}
+$condition .= $default;
+
 $product = "";
 if(filter_has_var(INPUT_GET, 'product_id') && preg_match('/^[0-9]+$/', filter_input(INPUT_GET,'product_id'))){
   $product = filter_input(INPUT_GET,'product_id');
@@ -55,7 +67,18 @@ $products = $class->rawQuery(raw: "SELECT id, name FROM products WHERE status = 
 
                             <form class="mt-4" action="<?= htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
                                 <div class="form-row">
-
+                                    <div class="form-group col-md-3">
+                                        <label for="sel1">Date From</label>
+                                        <input type="date" class="custom-select mr-sm-2" data-provide="datepicker"
+                                            placeholder="Date From" data-date-format="yyyy-mm-dd" name="date_from"
+                                            value="<?php echo ($_GET['date_from']) ?? '' ?>">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="sel1">Date To</label>
+                                        <input type="date" class="custom-select mr-sm-2" data-provide="datepicker"
+                                            placeholder="Date To" data-date-format="yyyy-mm-dd" name="date_to"
+                                            value="<?= filter_input(INPUT_GET, 'date_to') ?>">
+                                    </div>
                                     <div class="form-group col-md-3">
                                         <label for="sel1">Products</label>
                                         <select class="form-control" name='product_id'>
