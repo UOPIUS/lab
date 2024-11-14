@@ -27,14 +27,13 @@ if(filter_has_var(INPUT_GET, 'product_id') && preg_match('/^[0-9]+$/', filter_in
 }
 $condition .= $product;
 
-$raw = "SELECT p.name productName, k.quantity, u.full_name as user,un.name AS measured, k.created_at
+$raw = "SELECT p.name productName, k.quantity, u.full_name as user, k.created_at, t.name test
 FROM kits k JOIN products p ON k.product_id = p.id 
 LEFT JOIN users_tbl u ON k.owner_id = u.user_id 
-JOIN inventory_units un ON p.inventory_unit_id = un.id
+JOIN sub_labtest_tbl t ON k.test_id = t.id
 WHERE 1 = 1 $condition
 ORDER BY k.created_at DESC";
 
-echo $raw;
 $data = $class->rawQuery($raw);
 
 $products = $class->rawQuery(raw: "SELECT id, name FROM products WHERE status = 1 ORDER BY name ASC");
@@ -116,7 +115,7 @@ $products = $class->rawQuery(raw: "SELECT id, name FROM products WHERE status = 
                                         <?php foreach ($data as $row): ?>
                                         <tr>
                                             <td><?= $row->productName ?></td>
-                                            <td><?= $row->balance ?>[<?=$row->measured?>]</td>
+                                            <td><?= $row->test ?></td>
                                             <td><?= $row->quantity ?></td>
                                             <td><?= $row->user ?></td>
                                             <td><?= $row->created_at ?></td>
