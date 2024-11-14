@@ -19,7 +19,7 @@ $raw = "SELECT p.name productName, k.quantity, u.full_name as user,un.name AS me
 FROM kits k JOIN products p ON k.product_id = p.id 
 LEFT JOIN users_tbl u ON k.owner_id = u.user_id 
 JOIN inventory_units un ON p.inventory_unit_id = un.id
-WHERE 1 = 1 $condition'
+WHERE 1 = 1 $condition
 ORDER BY k.created_at DESC";
 
 echo $raw;
