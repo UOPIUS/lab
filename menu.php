@@ -253,6 +253,10 @@ endswitch;
                         <div class="sb-nav-link-icon"><i class="fa fa-table"></i></div>
                         Assigned Kits
                     </a>
+                    <a class="nav-link" href="/inventory/user_stock_history.php">
+                        <div class="sb-nav-link-icon"><i class="fa fa-bookmark"></i></div>
+                        Kit history
+                    </a>
                 <?php endif; ?>
             </div>
         </div>
