@@ -269,8 +269,10 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->execute();
 
                     //register kit us
-                    $query = $db->connect()->prepare("INSERT INTO kits(test_taken_id,test_id, quantity, owner_id,) VALUES (:testTaken,:test, :quantity, :owner)");
+                    $query = $db->connect()->prepare("INSERT INTO kits(test_taken_id,test_id, quantity, owner_id,product_id) 
+                    VALUES (:testTaken,:test, :quantity, :owner, :product)");
                     $query->bindParam(":test", $test);
+                    $query->bindParam(":product", $product);
                     $query->bindParam(":testTaken", $reference);
                     $query->bindParam(":owner", $user);
                     $query->bindParam(":quantity", $quantity);
