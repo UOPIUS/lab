@@ -15,12 +15,12 @@ if(filter_has_var(INPUT_GET, 'product_id') && preg_match('/^[0-9]+$/', filter_in
 }
 $condition .= $product;
 
-$raw = "SELECT p.name productName, st.unit, st.balance, st.created_at, st.updated_at, u.full_name as user,un.name AS measured
-FROM user_stocks st JOIN products p ON st.product_id = p.id 
-LEFT JOIN users_tbl u ON st.owner_id = u.user_id 
+$raw = "SELECT p.name productName, k.quantity, u.full_name as user,un.name AS measured, k.created_at
+FROM kits k JOIN products p ON k.product_id = p.id 
+LEFT JOIN users_tbl u ON k.owner_id = u.user_id 
 JOIN inventory_units un ON p.inventory_unit_id = un.id
 WHERE 1 = 1 $condition'
-ORDER BY st.created_at DESC";
+ORDER BY k.created_at DESC";
 
 $data = $class->rawQuery($raw);
 
@@ -81,12 +81,11 @@ $products = $class->rawQuery("SELECT id, name FROM products WHERE status = 1 ORD
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Product</th>
-                                            <th>Current Balance</th>
-                                            <th>Pieces</th>
+                                            <th>Kit</th>
+                                            <th>Test</th>
+                                            <th>Quantity used</th>
                                             <th>Owner</th>
                                             <th>Date</th>
-                                            <th>Last update</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -94,10 +93,9 @@ $products = $class->rawQuery("SELECT id, name FROM products WHERE status = 1 ORD
                                         <tr>
                                             <td><?= $row->productName ?></td>
                                             <td><?= $row->balance ?>[<?=$row->measured?>]</td>
-                                            <td><?= $row->unit ?></td>
+                                            <td><?= $row->quantity ?></td>
                                             <td><?= $row->user ?></td>
                                             <td><?= $row->created_at ?></td>
-                                            <td><?= $row->updated_at ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
