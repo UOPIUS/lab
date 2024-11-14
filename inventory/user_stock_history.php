@@ -22,6 +22,7 @@ JOIN inventory_units un ON p.inventory_unit_id = un.id
 WHERE 1 = 1 $condition'
 ORDER BY k.created_at DESC";
 
+echo $raw;
 $data = $class->rawQuery($raw);
 
 $products = $class->rawQuery(raw: "SELECT id, name FROM products WHERE status = 1 ORDER BY name ASC");
