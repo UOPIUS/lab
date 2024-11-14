@@ -201,6 +201,8 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                 $db->connect()->commit();
                 echo json_encode(["status" => $responseFlag, "message" => "Success", "errors" => $errorBag]);
             } elseif ($request[0]["HTTP_REQUEST_ACTION"] == 'HTTP_REQUEST_ASSIGN_KIT') {
+
+                $kits = "";
                 $responseFlag = true; //error free by default
 
                 $test = $request[0]["TEST"];
@@ -230,8 +232,12 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $pro = $db->connect()->query("SELECT p.name,i.quantity AS units 
                     FROM products p JOIN inventory_units i ON p.inventory_unit_id = i.id 
                     WHERE p.id = '$product'")->fetch(PDO::FETCH_OBJ);
+
                     $productName = $pro->name;
+
                     $defaultUnits = $pro->units;
+
+                    $kits .= ' ' . $productName . '[' . $quantity . '], ';
                     //get the current balance for this product and this staff
                     $query = $db->connect()->prepare("SELECT ust.balance,ust.unit,ust.rate FROM user_stocks ust
                     WHERE ust.owner_id = :owner AND ust.product_id = :product");
@@ -293,6 +299,9 @@ switch ($_POST['HTTP_REQUEST_ACTION']) {
                     $query->bindParam(":unit", $defaultUnits);
                     $query->execute();
                 } //end of foreach
+
+                //update the Test Taken Table to set the kits
+                $db->connect()->query("UPDATE tests_taken SET kit_used = '$kits' WHERE id = '$test'");
 
                 $db->connect()->commit();
                 echo json_encode([
