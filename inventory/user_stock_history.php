@@ -24,7 +24,7 @@ ORDER BY k.created_at DESC";
 
 $data = $class->rawQuery($raw);
 
-$products = $class->rawQuery("SELECT id, name FROM products WHERE status = 1 ORDER BY name ASC");
+$products = $class->rawQuery(raw: "SELECT id, name FROM products WHERE status = 1 ORDER BY name ASC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
