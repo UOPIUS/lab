@@ -241,6 +241,10 @@ endswitch;
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         User Assigned Stocks
                     </a>
+                    <a class="nav-link" href="/inventory/user_stock_history.php">
+                        <div class="sb-nav-link-icon"><i class="fa fa-bookmark"></i></div>
+                        Kit history
+                    </a>
                 <?php endif ?>
                 <?php if ($_SESSION['role_id'] == 108): ?>
                     <div class="sb-sidenav-menu-heading">Lab Technician Menu</div>
