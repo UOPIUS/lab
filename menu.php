@@ -105,7 +105,7 @@ endswitch;
                         </a>
 
                         <a class="nav-link" href="all_tranx.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-signal"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa fa-bar-chart"></i></div>
                             All Transactions
                         </a>
                         <a class="nav-link" href="req_reverse.php">
@@ -235,7 +235,7 @@ endswitch;
                     </div>
 
                     <a class="nav-link" href="/inventory/assigned_history.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-bars"></i></div>
                         Assigned History
                     </a>
                     <a class="nav-link" href="/inventory/user_stocks.php">
