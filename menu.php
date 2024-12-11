@@ -215,7 +215,7 @@ endswitch;
                         </a>
                     </a>
                 <?php endif; ?>
-                <?php if ($_SESSION['role_id'] == 107): ?>
+                <?php if ($_SESSION['role_id'] == 107 || $_SESSION['role_id'] == 106 || $_SESSION['role_id'] == 103): ?>
                     <div class="sb-sidenav-menu-heading">Inventory</div>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts"
                         aria-expanded="false" aria-controls="collapseLayouts">
