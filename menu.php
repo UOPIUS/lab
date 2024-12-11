@@ -167,7 +167,7 @@ endswitch;
                             Account Summary
                         </a>
                         <a class="nav-link" href="all_tranx.php">
-                            <div class="sb-nav-link-icon"><i class="fa fa-sort-alpha-desc"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-regular fa-layer-group"></i></div>
                             All Account Transactions
                         </a>
 
