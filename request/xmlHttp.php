@@ -5,6 +5,11 @@ if (!$user) {
     echo json_encode($response);
     return false;
 }
+//restrict access to relevant users 
+if (!in_array($_SESSION['role_id'], [103, 106, 107])) {
+    echo json_encode(["status" => false, "message" => 'You Have No Permission']);
+    exit();
+}
 $zero = 0;
 $credit = "credit";
 $debit = "debit";

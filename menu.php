@@ -89,7 +89,7 @@ endswitch;
                         <div class="sb-nav-link-icon"><i class="fas fa fa-bath"></i></div>
                         Tests Result
                     </a>
-                    <a class="nav-link" href="pendingLabDoc.php">
+                    <a class="nav-link" href="/pendingLabDoc.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-stethoscope"></i></div>
                         Pending Lab Test
                     </a>
@@ -157,7 +157,7 @@ endswitch;
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Transactions</div>
-                        <a class="nav-link" href="pendingLabDoc.php">
+                        <a class="nav-link" href="/pendingLabDoc.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-hospital"></i></i></div>
                             Pending Lab Test
                         </a>
