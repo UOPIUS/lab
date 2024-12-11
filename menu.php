@@ -239,7 +239,7 @@ endswitch;
                         Assigned History
                     </a>
                     <a class="nav-link" href="/inventory/user_stocks.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
                         User Assigned Stocks
                     </a>
                     <a class="nav-link" href="/inventory/user_stock_history.php">
