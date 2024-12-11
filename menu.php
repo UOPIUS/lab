@@ -168,7 +168,7 @@ endswitch;
                         </a>
                         <a class="nav-link" href="all_tranx.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-server"></i></div>
-                            All Account Transactions
+                            All Sales
                         </a>
 
                         <a class="nav-link" href="reversal.php">
